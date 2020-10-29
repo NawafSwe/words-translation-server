@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
+const mongoConnection = require('./configuration/MongoConnection');
 
 /* ------------ Choosing Env ------------ */
 if (process.env.NODE === 'production' || process.env.NODE_ENV === 'staging') {
@@ -19,11 +20,15 @@ app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors());
 
+/* ------------ Connecting to db ------------ */
+ mongoConnection(process.env.MONGO_URI);
 /* ------------ Testing Backend ------------ */
 app.get('/', async (req, res) => {
     res.send('works just fine').status(200);
 });
-
+/* ------------ Importing Routes ------------ */
+const wordRouter = require('./routes/wordRouter');
+app.use('/words', wordRouter);
 /* ------------ Establish Server Connection ------------ */
 const PORT = process.env.PORT || 8800;
 const HOST = process.env.HOST || 'localhost';
