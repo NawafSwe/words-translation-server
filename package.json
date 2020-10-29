@@ -1,0 +1,24 @@
+{
+  "name": "words-translation-server",
+  "version": "1.0.0",
+  "description": "package json that holds all dependencies for this project",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NawafSwe/words-translation-server.git"
+  },
+  "keywords": [
+    "translations",
+    "words",
+    "axenda"
+  ],
+  "author": "nawaf alsharqi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NawafSwe/words-translation-server/issues"
+  },
+  "homepage": "https://github.com/NawafSwe/words-translation-server#readme"
+}
