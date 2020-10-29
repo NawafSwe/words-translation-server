@@ -65,6 +65,7 @@ const getWordByTranslation = async (key, lang) => {
 const getWordByKey = async (key) => {
 
 };
+
 const putWordById = async (id, body) => {
     try {
         const response = await Word.findById(id);
@@ -100,6 +101,22 @@ const deleteWordTranslation = async (wordId, translationId) => {
     }
 }
 
+const postWordTranslation = async (wordId, body) => {
+    try {
+        const getWord = await Word.findById(wordId).populate('translations');
+        //creating a translation first in the db
+        const newTranslation = await wordTranslatedController.postTranslation(body);
+        await getWord.translations.push(newTranslation);
+        await getWord.save();
+        //returing word updated with its new translations
+        return await getWordById(wordId);
+    } catch (error) {
+        console.log(`error occurred in wordContrller at postWordTranslation error : ${error}`);
+    }
+
+};
+
+/* ---------- Exporting Functions ---------- */
 module.exports = {
     getWords,
     postWord,
@@ -108,5 +125,6 @@ module.exports = {
     getWordByTranslation,
     putWordById,
     putWordTranslation,
-    deleteWordTranslation
+    deleteWordTranslation,
+    postWordTranslation
 };

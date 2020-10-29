@@ -4,7 +4,11 @@
   "description": "package json that holds all dependencies for this project",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "npm install && npm update",
+    "start": "node src/index.js",
+    "start:staging": "NODE_ENV=staging node src/index.js",
+    "start:prod": "NODE_ENV=production node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
