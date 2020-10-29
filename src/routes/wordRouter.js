@@ -24,9 +24,24 @@ route.delete('/:id', async (req, res) => {
 });
 
 route.get('/:id', async (req, res) => {
+    const id = req.params.id;
     const response = await wordController.getWordById(id);
     res.json(response).status(200);
 
 });
+route.put('/:id', async (req, res) => {
+    //we need to agree on the process here if in the front-end who doing the call is he gonna pass only the new translation? or all and the new one
+    //my approach will consider it as he gonna pass only one info about the translation list
 
+    const response = await wordController.putWordById(id, req.body);
+    res.json(response).status(200);
+});
+
+route.put('/:id/wordTranslators/:transId', async (req, res) => {
+    const wordId = req.params.id;
+    const translationId = req.params.transId;
+    console.log(translationId);
+    const response = await wordController.putWordTranslation(wordId, translationId, req.body);
+    res.json(response).status(200);
+});
 module.exports = route;
