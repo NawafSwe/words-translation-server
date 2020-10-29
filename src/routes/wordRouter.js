@@ -13,5 +13,14 @@ route.post('/', async (req, res) => {
     res.send(response).status(200);
 });
 
+route.delete('/:id', async (req, res) => {
+    const response = await wordController.deleteWord(req.params.id);
+    res.send(response).status(200);
+});
+
+route.get('/:id', async (req, res) => {
+    const response = await wordController.getWordById(id);
+    res.send(response).status(200);
+});
 
 module.exports = route;
