@@ -1,5 +1,6 @@
 /* ---------- Importing Packages ---------- */
 const Word = require('../models/word');
+const translationHelper = require('../helpers/wordsHelperFunctions');
 
 const getWords = async () => {
     try {
@@ -38,9 +39,13 @@ const getWordById = async (id) => {
 }
 const getWordByTranslation = async (key, lang) => {
     try {
-        console.log(`key is ${key}`);
-        console.log(`lang is ${lang}`);
-    } catch (error) {
+        const response = await Word.findOne({key: key});
+        const foundList = response.translations;
+        const filteredArray = await translationHelper.filter(foundList, lang);
+        return filteredArray;
+
+    } catch
+        (error) {
         console.log(`error happened at getWordByTranslation() error: ${error}`);
     }
 }
