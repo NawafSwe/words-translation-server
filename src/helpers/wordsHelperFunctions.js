@@ -4,12 +4,5 @@ const filter = async (list, lang) => {
             return list[k];
         }
     }
-
 }
-const updateTranslation = async () => {
-
-};
-const deleteTranslation = async () => {
-
-};
 module.exports = {filter};

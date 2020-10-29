@@ -89,12 +89,24 @@ const putWordTranslation = async (wordId, translationId, body) => {
     }
 }
 
-const deleteWordTranslation = async (id) => {
+const deleteWordTranslation = async (wordId, translationId) => {
     try {
-
+        const deletedWord = await wordTranslatedController.deleteTranslation(translationId);
+        //returning response after deletaion;
+        const response = await Word.findById(wordId);
+        return response;
     } catch (error) {
         console.log(`error ouccrred in wordController at deleteWordTranslation error ${error}`);
     }
 }
 
-module.exports = {getWords, postWord, deleteWord, getWordById, getWordByTranslation, putWordById, putWordTranslation};
+module.exports = {
+    getWords,
+    postWord,
+    deleteWord,
+    getWordById,
+    getWordByTranslation,
+    putWordById,
+    putWordTranslation,
+    deleteWordTranslation
+};

@@ -40,8 +40,14 @@ route.put('/:id', async (req, res) => {
 route.put('/:id/wordTranslators/:transId', async (req, res) => {
     const wordId = req.params.id;
     const translationId = req.params.transId;
-    console.log(translationId);
     const response = await wordController.putWordTranslation(wordId, translationId, req.body);
+    res.json(response).status(200);
+});
+
+route.delete('/:id/wordTranslators/:transId', async (req, res) => {
+    const wordId = req.params.id;
+    const translationId = req.params.transId;
+    const response = await wordController.deleteWordTranslation(wordId, translationId);
     res.json(response).status(200);
 });
 module.exports = route;

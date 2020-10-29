@@ -1,5 +1,6 @@
 /* ---------- Importing Packages ---------- */
 const WordTranslated = require('../models/wordTranslated');
+
 const getTranslations = async () => {
     try {
         const response = await WordTranslated.find({});
