@@ -65,6 +65,7 @@ const getWordByTranslation = async (key, lang) => {
 const getWordByKey = async (key) => {
 
 };
+
 const putWordById = async (id, body) => {
     try {
         const response = await Word.findById(id);
@@ -89,12 +90,41 @@ const putWordTranslation = async (wordId, translationId, body) => {
     }
 }
 
-const deleteWordTranslation = async (id) => {
+const deleteWordTranslation = async (wordId, translationId) => {
     try {
-
+        const deletedWord = await wordTranslatedController.deleteTranslation(translationId);
+        //returning response after deletaion;
+        const response = await Word.findById(wordId);
+        return response;
     } catch (error) {
         console.log(`error ouccrred in wordController at deleteWordTranslation error ${error}`);
     }
 }
 
-module.exports = {getWords, postWord, deleteWord, getWordById, getWordByTranslation, putWordById, putWordTranslation};
+const postWordTranslation = async (wordId, body) => {
+    try {
+        const getWord = await Word.findById(wordId).populate('translations');
+        //creating a translation first in the db
+        const newTranslation = await wordTranslatedController.postTranslation(body);
+        await getWord.translations.push(newTranslation);
+        await getWord.save();
+        //returing word updated with its new translations
+        return await getWordById(wordId);
+    } catch (error) {
+        console.log(`error occurred in wordContrller at postWordTranslation error : ${error}`);
+    }
+
+};
+
+/* ---------- Exporting Functions ---------- */
+module.exports = {
+    getWords,
+    postWord,
+    deleteWord,
+    getWordById,
+    getWordByTranslation,
+    putWordById,
+    putWordTranslation,
+    deleteWordTranslation,
+    postWordTranslation
+};
