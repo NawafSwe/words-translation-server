@@ -72,10 +72,12 @@ const putWordById = async (id, body) => {
             response.key = await body.key;
             await response.save();
         }
+        return response;
     } catch (error) {
         console.log(`error ouccurred in wordController at putWordById error ${error}`);
     }
 }
+
 const putWordTranslation = async (wordId, translationId, body) => {
     try {
         const getTranslatedWord = await wordTranslatedController.putTranslation(translationId, body);
@@ -84,6 +86,14 @@ const putWordTranslation = async (wordId, translationId, body) => {
 
     } catch (error) {
         console.log(`error occurred in the Word Controller at putWordTranslation error : ${error}`);
+    }
+}
+
+const deleteWordTranslation = async (id) => {
+    try {
+
+    } catch (error) {
+        console.log(`error ouccrred in wordController at deleteWordTranslation error ${error}`);
     }
 }
 
