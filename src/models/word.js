@@ -1,6 +1,5 @@
 /* ------------ Requiring Packages ------------ */
 const mongoose = require('mongoose');
-
 /* ------------ Creating Schemas edited By ------------ */
 //org : {ref org collection}
 const wordSchema = mongoose.Schema({
@@ -22,7 +21,6 @@ const wordSchema = mongoose.Schema({
     translations: {
         //for example
         //en : nawaf
-
     },
     // too keep track of the data we won't delete
     deleted: {type: Boolean, default: false}

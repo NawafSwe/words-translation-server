@@ -130,8 +130,6 @@ const postWordTranslation = async (wordId, body) => {
     }
 
 };
-
-
 /* ---------- Exporting Functions ---------- */
 module.exports = {
     getWords,

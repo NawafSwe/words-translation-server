@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoConnection = require('./configuration/MongoConnection');
-const sanitizer = require('express-sanitizer');
+
 
 
 /* ------------ Choosing Env ------------ */

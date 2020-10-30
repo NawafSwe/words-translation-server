@@ -4,6 +4,9 @@ const route = express.Router();
 const wordController = require('../controllers/wordController');
 const sanitizer = require('express-sanitizer');
 
+/* ------------ Route Config ------------ */
+route.use(sanitizer());
+
 route.get('/', async (req, res) => {
     if (req.query.key && req.query.lang) {
         const response = await wordController.getWordByTranslation(req.query.key, req.query.lang);
