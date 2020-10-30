@@ -8,3 +8,4 @@ const langSchema = mongoose.Schema({
 });
 const Lang = mongoose.model('Lang', langSchema);
 module.exports = Lang;
+ 
