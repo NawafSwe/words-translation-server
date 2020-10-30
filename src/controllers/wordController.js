@@ -1,6 +1,7 @@
 /* ---------- Importing Packages ---------- */
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
+
 /** @author Nawaf Alsharqi
  * @async
  * @function
@@ -17,15 +18,28 @@ const getWords = async () => {
     } catch (error) {
         console.log(`error happened at getWords() ${error}`);
     }
-}
+};
 const postWord = async (body) => {
-    //sanitazing first the body
-    const key_from_body = {key: body.key}
     try {
-        const response = await Word.create(key_from_body);
-
+        //first creating the Word with its key before adding edits to it.
+        const wordKey = body.key;
+        const translations = body.translations;
+        const editsData = body.edits;
+        const response = await Word.create({key: wordKey, translations: translations});
+        //forming the edits version
+        editsData.version = {
+            key: wordKey,
+            edits: {
+                editor: editsData.editor,
+                timestamp: editsData.timestamp,
+            },
+            translations: translations
+        };
+        await response.edits.push(editsData);
+        await response.save();
+        //returning the word with its data
         return response;
-    } catch (e) {
+    } catch (error) {
         console.log(`error happened in word controller at postWord() ${error}`);
     }
 }
