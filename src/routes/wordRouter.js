@@ -6,7 +6,6 @@ const sanitizer = require('express-sanitizer');
 
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
-
 route.get('/', async (req, res) => {
     if (req.query.key && req.query.lang) {
         const response = await wordController.getWordByTranslation(req.query.key, req.query.lang);
@@ -50,13 +49,6 @@ route.put('/:id', async (req, res) => {
     //     req.body.translations.lang = req.sanitize(req.body.translations.word);
     // }
     const response = await wordController.putWordById(id, req.body);
-    res.json(response).status(200);
-});
-
-
-route.post('/:id/wordTranslators', async (req, res) => {
-    const wordId = req.params.id;
-    const response = await wordController.postWordTranslation(wordId, req.body);
     res.json(response).status(200);
 });
 module.exports = route;

@@ -81,5 +81,5 @@ module.exports = {
     deleteWord,
     getWordById,
     putWordById,
-    postWordTranslation
+
 };
