@@ -1,7 +1,6 @@
 /* ---------- Importing Packages ---------- */
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
-const wordTranslatedController = require('../controllers/wordTranslatedController');
 
 /** @author Nawaf Alsharqi
  * @async

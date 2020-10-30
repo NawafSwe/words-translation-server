@@ -25,6 +25,6 @@ const wordSchema = mongoose.Schema({
     deleted: {type: Boolean, default: false}
 });
 /* ------------ Creating Word Model ------------ */
-const Word = mongoose.model('e', wordSchema);
+const Word = mongoose.model('Word', wordSchema);
 module.exports = Word;
 
