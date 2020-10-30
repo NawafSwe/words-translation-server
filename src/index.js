@@ -24,7 +24,7 @@ app.use(cors());
 app.use(sanitizer());
 
 /* ------------ Connecting to db ------------ */
-mongoConnection(process.env.MONGO_URI);
+ mongoConnection(process.env.MONGO_URI);
 /* ------------ Testing Backend ------------ */
 app.get('/', async (req, res) => {
     res.send('works just fine').status(200);

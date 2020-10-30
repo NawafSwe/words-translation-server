@@ -2,6 +2,7 @@
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
 const wordTranslatedController = require('../controllers/wordTranslatedController');
+
 /** @author Nawaf Alsharqi
  * @async
  * @function
@@ -12,13 +13,15 @@ const wordTranslatedController = require('../controllers/wordTranslatedControlle
  */
 const getWords = async () => {
     try {
-        const response = await Word.find({}).populate('translations');
+        //return unDeleted words
+        const response = await Word.find().populate('translations');
         return response;
     } catch (error) {
         console.log(`error happened at getWords() ${error}`);
     }
 }
 const postWord = async (body) => {
+    //sanitazing first the body
     const key_from_body = {key: body.key}
     try {
         const response = await Word.create(key_from_body);
@@ -127,6 +130,7 @@ const postWordTranslation = async (wordId, body) => {
     }
 
 };
+
 
 /* ---------- Exporting Functions ---------- */
 module.exports = {

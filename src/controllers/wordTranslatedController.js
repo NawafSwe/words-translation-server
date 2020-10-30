@@ -28,10 +28,10 @@ const putTranslation = async (id, body) => {
 
 };
 
-const getTranslationById = async(id)=>{
-    try{
+const getTranslationById = async (id) => {
+    try {
 
-    }catch (error){
+    } catch (error) {
 
     }
 }

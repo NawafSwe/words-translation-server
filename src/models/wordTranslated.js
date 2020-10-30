@@ -2,10 +2,14 @@
 const mongoose = require('mongoose');
 
 /* ------------ Creating Schemas ------------ */
-const wordTranslated = mongoose.Schema({
+const translatedWord = mongoose.Schema({
+    //translatedWord
     word: {type: String, require: true},
-    lang: {type: String, require: true}
+    lang: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Lang',
+    }
 });
 /* ------------ Creating Word Model ------------ */
-const WordTranslated = mongoose.model('WordTranslated', wordTranslated);
-module.exports = WordTranslated;
+const TranslatedWord = mongoose.model('TranslatedWord', translatedWord);
+module.exports = TranslatedWord;
