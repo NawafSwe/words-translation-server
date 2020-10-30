@@ -1,0 +1,3 @@
+//avatar url
+//name
+//roles []
