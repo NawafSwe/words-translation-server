@@ -1,7 +1,6 @@
 /* ---------- Importing Packages ---------- */
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
-
 /** @author Nawaf Alsharqi
  * @async
  * @function
@@ -92,7 +91,6 @@ const postWordTranslation = async (wordId, body) => {
     } catch (error) {
         console.log(`error occurred in wordContrller at postWordTranslation error : ${error}`);
     }
-
 };
 /* ---------- Exporting Functions ---------- */
 module.exports = {
