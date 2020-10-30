@@ -1,7 +1,7 @@
 /* ------------ Requiring Packages ------------ */
 const mongoose = require('mongoose');
 /* ------------ Creating Schemas edited By ------------ */
-//org : {ref org collection}
+// later we can support orgs as => org : {ref org collection}
 const wordSchema = mongoose.Schema({
     //key represents the main word itself
     key: {type: String, require: true},

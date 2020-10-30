@@ -7,7 +7,6 @@ const cors = require('cors');
 const mongoConnection = require('./configuration/MongoConnection');
 
 
-
 /* ------------ Choosing Env ------------ */
 if (process.env.NODE === 'production' || process.env.NODE_ENV === 'staging') {
     require('custom-env').env(process.env.NODE_ENV);
@@ -21,10 +20,8 @@ app.use(bodyParser.json());
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors());
-app.use(sanitizer());
-
 /* ------------ Connecting to db ------------ */
- mongoConnection(process.env.MONGO_URI);
+mongoConnection(process.env.MONGO_URI);
 /* ------------ Testing Backend ------------ */
 app.get('/', async (req, res) => {
     res.send('works just fine').status(200);

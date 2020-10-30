@@ -66,12 +66,7 @@ route.put('/:id/wordTranslators/:transId', async (req, res) => {
     res.json(response).status(200);
 });
 
-route.delete('/:id/wordTranslators/:transId', async (req, res) => {
-    const wordId = req.params.id;
-    const translationId = req.params.transId;
-    const response = await wordController.deleteWordTranslation(wordId, translationId);
-    res.json(response).status(200);
-});
+
 route.post('/:id/wordTranslators', async (req, res) => {
     const wordId = req.params.id;
     const response = await wordController.postWordTranslation(wordId, req.body);
