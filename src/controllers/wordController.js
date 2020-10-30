@@ -100,7 +100,16 @@ const deleteWordTranslation = async (wordId, translationId) => {
         console.log(`error ouccrred in wordController at deleteWordTranslation error ${error}`);
     }
 }
-
+/** @author Nawaf Alsharqi
+ * @async
+ * @function
+ * @name postWordTranslation
+ * @param {String} wordId the word id
+ * @param {Object} body contains the translation info
+ * @returns {Promise<Response>} returns object that contains all information about the new data added to the database.
+ * @throws {Error} may throws an error failure during the process of adding new word translation.
+ * @description post new word translation to the database
+ */
 const postWordTranslation = async (wordId, body) => {
     try {
         const getWord = await Word.findById(wordId).populate('translations');
