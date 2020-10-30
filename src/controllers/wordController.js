@@ -13,7 +13,7 @@ const translationHelper = require('../helpers/wordsHelperFunctions');
 const getWords = async () => {
     try {
         //return unDeleted words
-        const response = await Word.find().populate('translations');
+        const response = await Word.find({});
         return response;
     } catch (error) {
         console.log(`error happened at getWords() ${error}`);
@@ -24,11 +24,7 @@ const postWord = async (body) => {
     const key_from_body = {key: body.key}
     try {
         const response = await Word.create(key_from_body);
-        if (body.translation) {
-            const translation = await wordTranslatedController.postTranslation(body.translation);
-            await response.translations.push(translation);
-            await response.save();
-        }
+
         return response;
     } catch (e) {
         console.log(`error happened in word controller at postWord() ${error}`);
@@ -37,7 +33,7 @@ const postWord = async (body) => {
 
 const deleteWord = async (id) => {
     try {
-        const response = await Word.findByIdAndDelete(id).populate('translations');
+        const response = await Word.findByIdAndDelete(id);
         return response;
 
     } catch (error) {
@@ -46,38 +42,18 @@ const deleteWord = async (id) => {
 }
 const getWordById = async (id) => {
     try {
-        const response = await Word.findById(id).populate('translations');
+        const response = await Word.findById(id);
         return response;
 
     } catch (error) {
         console.log(`error happened getWordById() during getting the word with id : ${id} error: ${error}`);
     }
 }
-const getWordByTranslation = async (key, lang) => {
-    try {
-        const response = await Word.findOne({key: key}).populate('translations');
-        const foundList = await response.translations;
-        const foundTranslatedWord = await translationHelper.filter(foundList, lang);
-        return {
-            id: response.id,
-            word: foundTranslatedWord,
-            key: key,
-            lang: lang
 
-        };
-    } catch
-        (error) {
-        console.log(`error happened at getWordByTranslation() error: ${error}`);
-    }
-}
 
 const putWordById = async (id, body) => {
     try {
-        const response = await Word.findById(id);
-        if (body.key) {
-            response.key = await body.key;
-            await response.save();
-        }
+        const response = await Word.findByIdAndUpdate(id, body);
         return response;
     } catch (error) {
         console.log(`error ouccurred in wordController at putWordById error ${error}`);
@@ -86,7 +62,6 @@ const putWordById = async (id, body) => {
 
 const putWordTranslation = async (wordId, translationId, body) => {
     try {
-        const getTranslatedWord = await wordTranslatedController.putTranslation(translationId, body);
         const getWord = await Word.findById(wordId).populate('translations');
         return getWord;
 
@@ -95,16 +70,6 @@ const putWordTranslation = async (wordId, translationId, body) => {
     }
 }
 
-const deleteWordTranslation = async (wordId, translationId) => {
-    try {
-        const deletedWord = await wordTranslatedController.deleteTranslation(translationId);
-        //returning response after deletaion;
-        const response = await Word.findById(wordId);
-        return response;
-    } catch (error) {
-        console.log(`error ouccrred in wordController at deleteWordTranslation error ${error}`);
-    }
-}
 /** @author Nawaf Alsharqi
  * @async
  * @function
@@ -135,9 +100,7 @@ module.exports = {
     postWord,
     deleteWord,
     getWordById,
-    getWordByTranslation,
     putWordById,
     putWordTranslation,
-    deleteWordTranslation,
     postWordTranslation
 };
