@@ -53,19 +53,6 @@ route.put('/:id', async (req, res) => {
     res.json(response).status(200);
 });
 
-route.put('/:id/wordTranslators/:transId', async (req, res) => {
-    const wordId = req.params.id;
-    const translationId = req.params.transId;
-    //put it in the controller much better
-    if (req.body.word)
-        req.body.word = req.sanitize(req.body.word);
-    if (req.body.lang)
-        req.body.lang = req.sanitize(req.body.lang);
-
-    const response = await wordController.putWordTranslation(wordId, translationId, req.body);
-    res.json(response).status(200);
-});
-
 
 route.post('/:id/wordTranslators', async (req, res) => {
     const wordId = req.params.id;

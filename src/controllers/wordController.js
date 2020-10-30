@@ -46,7 +46,8 @@ const postWord = async (body) => {
 
 const deleteWord = async (id) => {
     try {
-        const response = await Word.findByIdAndDelete(id);
+        //marking the word as deleted in the database
+        const response = await Word.findById(id, {deleted: true});
         return response;
 
     } catch (error) {
@@ -73,39 +74,6 @@ const putWordById = async (id, body) => {
     }
 }
 
-const putWordTranslation = async (wordId, translationId, body) => {
-    try {
-        const getWord = await Word.findById(wordId).populate('translations');
-        return getWord;
-
-    } catch (error) {
-        console.log(`error occurred in the Word Controller at putWordTranslation error : ${error}`);
-    }
-}
-
-/** @author Nawaf Alsharqi
- * @async
- * @function
- * @name postWordTranslation
- * @param {String} wordId the word id
- * @param {Object} body contains the translation info
- * @returns {Promise<Response>} returns object that contains all information about the new data added to the database.
- * @throws {Error} may throws an error failure during the process of adding new word translation.
- * @description post new word translation to the database.
- */
-const postWordTranslation = async (wordId, body) => {
-    try {
-        const getWord = await Word.findById(wordId).populate('translations');
-        //creating a translation first in the db
-        const newTranslation = await wordTranslatedController.postTranslation(body);
-        await getWord.translations.push(newTranslation);
-        await getWord.save();
-        //returing word updated with its new translations
-        return await getWordById(wordId);
-    } catch (error) {
-        console.log(`error occurred in wordContrller at postWordTranslation error : ${error}`);
-    }
-};
 /* ---------- Exporting Functions ---------- */
 module.exports = {
     getWords,
@@ -113,6 +81,5 @@ module.exports = {
     deleteWord,
     getWordById,
     putWordById,
-    putWordTranslation,
     postWordTranslation
 };
