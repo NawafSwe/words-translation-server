@@ -6,14 +6,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mongoConnection = require('./configuration/MongoConnection');
 
-
 /* ------------ Choosing Env ------------ */
 if (process.env.NODE === 'production' || process.env.NODE_ENV === 'staging') {
     require('custom-env').env(process.env.NODE_ENV);
 } else {
     require('dotenv').config();
 }
-
 /* ------------ App Config ------------ */
 const app = express();
 app.use(bodyParser.json());
@@ -35,4 +33,3 @@ const HOST = process.env.HOST || 'localhost';
 
 app.listen(PORT, HOST);
 console.log(`Server running on http://${HOST}:${PORT}`);
-
