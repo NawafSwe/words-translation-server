@@ -2,7 +2,14 @@
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
 const wordTranslatedController = require('../controllers/wordTranslatedController');
-
+/** @author Nawaf Alsharqi
+ * @async
+ * @function
+ * @name getWords
+ * @returns {Promise<Response>} response contains all words with its translations from the database.
+ * @throws {Error} may throw an error if failuer occuured.
+ * @description get all words with its translations from the database.
+ */
 const getWords = async () => {
     try {
         const response = await Word.find({}).populate('translations');
@@ -62,10 +69,6 @@ const getWordByTranslation = async (key, lang) => {
     }
 }
 
-const getWordByKey = async (key) => {
-
-};
-
 const putWordById = async (id, body) => {
     try {
         const response = await Word.findById(id);
@@ -108,7 +111,7 @@ const deleteWordTranslation = async (wordId, translationId) => {
  * @param {Object} body contains the translation info
  * @returns {Promise<Response>} returns object that contains all information about the new data added to the database.
  * @throws {Error} may throws an error failure during the process of adding new word translation.
- * @description post new word translation to the database
+ * @description post new word translation to the database.
  */
 const postWordTranslation = async (wordId, body) => {
     try {

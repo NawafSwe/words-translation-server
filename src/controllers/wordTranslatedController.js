@@ -27,6 +27,14 @@ const putTranslation = async (id, body) => {
     }
 
 };
+
+const getTranslationById = async(id)=>{
+    try{
+
+    }catch (error){
+
+    }
+}
 const deleteTranslation = async (id) => {
     try {
         const response = await WordTranslated.findByIdAndRemove(id);
