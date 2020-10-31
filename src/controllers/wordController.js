@@ -104,6 +104,16 @@ const putWordById = async (id, body) => {
     }
 }
 
+const putWordByKey = async (key, body) => {
+    try {
+        const response = await Word.find({key: key});
+        //checking the content of the body
+
+    } catch (error) {
+        console.log(`error occurred in the wordController at putWordByKey() error: ${error}`);
+    }
+}
+
 /* ---------- Exporting Functions ---------- */
 /**
  * A module contains all functions have the controlls of word collection in the database
