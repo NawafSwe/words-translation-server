@@ -2,10 +2,10 @@
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
 
-/** @author Nawaf Alsharqi
+/** @author Nawaf Alsharqi.
  * @async
  * @function
- * @name getWords
+ * @name getWords.
  * @returns {Promise<Response>} response contains all words with its translations from the database.
  * @throws {Error} may throw an error if failuer occuured.
  * @description get all words with its translations from the database.
@@ -21,26 +21,21 @@ const getWords = async () => {
 };
 const postWord = async (body) => {
     try {
-        //first creating the Word with its key before adding edits to it.
+        //extracting the data to format everything.
         const wordKey = body.key;
         const translations = body.translations;
         const editsData = body.edits;
+        const timestamp = editsData.timestamp;
+        const editor = editsData.editor;
         const response = await Word.create({key: wordKey, translations: translations});
         //forming the edits version
-        editsData.version = {
-            key: wordKey,
-            edits: {
-                editor: editsData.editor,
-                timestamp: editsData.timestamp,
-            },
-            translations: translations
-        };
+        editsData.version = translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
         await response.edits.push(editsData);
         await response.save();
         //returning the word with its data
         return response;
     } catch (error) {
-        console.log(`error happened in word controller at postWord() ${error}`);
+        console.log(`error happened in word controller at postWord() error: ${error}`);
     }
 }
 
