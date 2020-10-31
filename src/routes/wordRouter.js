@@ -2,6 +2,7 @@
 const express = require('express');
 const route = express.Router();
 const wordController = require('../controllers/wordController');
+const sanitizerHelper = require('../helpers/sanitizerHelperFunctions');
 const sanitizer = require('express-sanitizer');
 
 /* ------------ Route Config ------------ */
@@ -19,13 +20,7 @@ route.get('/', async (req, res) => {
 });
 
 route.post('/', async (req, res) => {
-    // req.body.key = req.sanitize(req.body.key);
-    // //if translation included
-    // if (req.body.translations) {
-    //     req.body.translations.lang = req.sanitize(req.body.translations.lang);
-    //     req.body.translations.lang = req.sanitize(req.body.translations.word);
-    // }
-
+    await sanitizerHelper.sanitizeWord(req);
     const response = await wordController.postWord(req.body);
     res.json(response).status(200);
 });
