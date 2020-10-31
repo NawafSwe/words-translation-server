@@ -26,7 +26,10 @@ app.get('/', async (req, res) => {
 });
 /* ------------ Importing Routes ------------ */
 const wordRouter = require('./routes/wordRouter');
+const languageRouter = require('./routes/languageRouter');
 app.use('/words', wordRouter);
+app.use('/languages', languageRouter);
+
 /* ------------ Establish Server Connection ------------ */
 const PORT = process.env.PORT || 8800;
 const HOST = process.env.HOST || 'localhost';
