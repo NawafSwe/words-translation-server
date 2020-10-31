@@ -6,6 +6,8 @@ const sanitizer = require('express-sanitizer');
 
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
+
+/* ---------- Routing ---------- */
 route.get('/', async (req, res) => {
     if (req.query.key && req.query.lang) {
         const response = await wordController.getWordByTranslation(req.query.key, req.query.lang);
@@ -51,4 +53,5 @@ route.put('/:id', async (req, res) => {
     const response = await wordController.putWordById(id, req.body);
     res.json(response).status(200);
 });
+
 module.exports = route;
