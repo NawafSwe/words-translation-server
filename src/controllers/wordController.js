@@ -2,6 +2,7 @@
 const Word = require('../models/word');
 const translationHelper = require('../helpers/wordsHelperFunctions');
 
+/* ------------------- Functions ------------------- */
 /** @author Nawaf Alsharqi.
  * @async
  * @function

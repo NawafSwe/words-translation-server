@@ -1,3 +1,5 @@
+/* ------------------- Functions ------------------- */
+
 /** @author Nawaf Alsharqi
  * @exports
  * @async

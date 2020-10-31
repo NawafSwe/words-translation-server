@@ -1,7 +1,7 @@
 /*          ------------------- EXPLANATION -------------------
  since all the request must has validation schema a separate file created to check the schema of a request;
 */
-/* ------------------- functions ------------------- */
+/* ------------------- Functions ------------------- */
 
 /** @author Nawaf Alsharqi
  * @export
