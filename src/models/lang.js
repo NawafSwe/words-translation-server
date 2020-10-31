@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 /* ------------ Creating Schemas edited By ------------ */
 
-const langSchema = mongoose.Schema({
+const languageSchema = mongoose.Schema({
     //title: language title such saudi arabia
     title: {type: String, require: true},
     //code: code of the language such ar stands for saudi arabia
@@ -11,7 +11,7 @@ const langSchema = mongoose.Schema({
     direction: {type: String, require: true}
 });
 /* ------------ Creating Mongoose Model ------------ */
-const Lang = mongoose.model('Lang', langSchema);
+const Language = mongoose.model('Language', languageSchema);
 /* ---------- Exporting Model ---------- */
-module.exports = Lang;
+module.exports = Language;
 
