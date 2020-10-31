@@ -1,8 +1,31 @@
-const filter = async (list, lang) => {
-    for (let k = 0; k < list.length; k++) {
-        if (list[k].lang.toLowerCase() === lang.toLowerCase()) {
-            return list[k];
-        }
+/* ------------------- Functions ------------------- */
+
+/** @author Nawaf Alsharqi
+ * @exports
+ * @async
+ * @function
+ * @name versionFormatter.
+ * @param {String} wordKey the word key.
+ * @param {String} editor id of the editor.
+ * @param {Number} timestamp time for the editing.
+ * @param {Object} translations data about the world for each language.
+ * @returns {Promise<Object>} formatted javaScript object.
+ * @throws {Error} throws an error if there is an error.
+ * @description formatting version object.
+ */
+const versionFormatter = async (wordKey, editor, timestamp, translations) => {
+    try {
+        return {
+            key: wordKey,
+            edits: {
+                editor: editor,
+                timestamp: timestamp,
+            },
+            translations: translations
+        };
+    } catch (error) {
+        console.log(`error occurred in the wordHelpersFunctions error: ${error}`);
     }
 }
-module.exports = {filter};
+/* ---------- Exporting Functions ---------- */
+module.exports = {versionFormatter};
