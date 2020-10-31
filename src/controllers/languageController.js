@@ -1,7 +1,15 @@
 /* ---------- Importing Packages ---------- */
-const Language = require('../models/lang');
+const Language = require('../models/language');
 
 /* ------------------- Functions ------------------- */
+/** @author Nawaf Alsharqi
+ * @async
+ * @function
+ * @name getLanguages
+ * @returns {Promise<Object>} returns array of languages objects
+ * @throws {Error} throws an error if there is an error
+ * @description getting all languages from the database
+ */
 const getLanguages = async () => {
     try {
         const response = await Language.find({});
@@ -51,8 +59,12 @@ const getLanguageById = async (id) => {
 
 /* ---------- Exporting Functions ---------- */
 /**
- * A module that control language collection from the database.
- * @exports {{getLanguages: (function(): Promise<*>)}}
+ * * A module that control language collection from the database.
+ * @exports {{deleteLanguage: (function(id): Promise<Object>),
+ * getLanguages: (function(): Promise<Object>),
+ * putLanguage: (function(id, body): Promise<Object>),
+ * getLanguageById: (function(id): Promise<Object>),
+ * getLanguageByCode: (function(code): Promise<Object>)}}
  */
 module.exports = {
     getLanguages, getLanguageByCode,

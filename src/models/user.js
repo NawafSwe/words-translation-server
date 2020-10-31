@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 /* ------------ Creating Schemas ------------ */
 const userSchema = mongoose.Schema({
     //name: name of the user
-    name: {type: String, required: true},
+     name: {type: String, required: true},
     //avatarUrl: avatar picture for a user
     // avatarUrl: {type: String, required: true}
 });
@@ -15,6 +15,3 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 /* ---------- Exporting Model ---------- */
 module.exports = User;
-
-
-

@@ -21,7 +21,6 @@ const getWords = async () => {
     }
 };
 /** @author Nawaf Alsharqi.
- * @exports
  * @async
  * @function
  * @name postWord.
@@ -50,7 +49,6 @@ const postWord = async (body) => {
     }
 }
 /** @author Nawaf Alsharqi.
- * @exports
  * @async
  * @function
  * @name deleteWord.
@@ -70,7 +68,6 @@ const deleteWord = async (id) => {
     }
 };
 /** @author Nawaf Alsharqi.
- * @exports
  * @async
  * @function
  * @name getWordById.
@@ -90,7 +87,6 @@ const getWordById = async (id) => {
 }
 
 /** @author Nawaf Alsharqi.
- * @exports
  * @async
  * @function
  * @name putWordById.
@@ -109,6 +105,14 @@ const putWordById = async (id, body) => {
 }
 
 /* ---------- Exporting Functions ---------- */
+/**
+ * A module contains all functions have the controlls of word collection in the database
+ * @exports {{getWordById: (function(String): Promise<Object>),
+ * postWord: (function(Object): Promise<Object>),
+ * deleteWord: (function(String): Promise<Object>),
+ * getWords: (function(): Promise<Response>),
+ * putWordById: (function(String, *=): Promise<Object>)}}
+ */
 module.exports = {
     getWords,
     postWord,
