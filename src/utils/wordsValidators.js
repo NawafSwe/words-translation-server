@@ -15,6 +15,10 @@ const validateSchema = require('./checkSchema');
  */
 
 const validate = (method) => {
+    switch (method){
+
+        case 'postWord': {}
+    }
 }
 /* ------------------- Exporting Function ------------------- */
 module.exports = validate;

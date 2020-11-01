@@ -20,7 +20,7 @@ route.get('/', async (req, res) => {
 });
 
 route.post('/', async (req, res) => {
-    await sanitizerHelper.sanitizeWord(req);
+    // await sanitizerHelper.sanitizeWord(req);
     const response = await wordController.postWord(req.body);
     res.json(response).status(200);
 });
