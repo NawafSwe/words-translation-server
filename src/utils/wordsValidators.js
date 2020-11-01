@@ -17,6 +17,18 @@ const validateSchema = require('./checkSchema');
 const validate = (method) => {
     switch (method) {
 
+        case 'getWords': {
+            return [
+                /* ------------------- Schema Validation ------------------- */
+                body(' ').custom((value, {req}) => {
+                    const schemas = [undefined];
+                    if (validateSchema(schemas, req)) {
+                        return true;
+                    }
+                }),
+                /* ------------------- End Of Schema Validation ------------------- */
+            ];
+        }
         case 'postWord': {
             return [
                 /* ------------------- Schema Validation ------------------- */

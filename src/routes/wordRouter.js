@@ -7,15 +7,13 @@ const sanitizer = require('express-sanitizer');
 const validate = require('../utils/wordsValidators');
 const {validationResult} = require('express-validator/check');
 
-
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
 
 /* ---------- Routing ---------- */
 route.get('/', async (req, res) => {
-    if (req.query.key && req.query.lang) {
-        const response = await wordController.getWordByTranslation(req.query.key, req.query.lang);
-        res.json(response).status(200);
+    if (false) {
+
     } else {
         const response = await wordController.getWords();
         res.json(response).status(200);
