@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoConnection = require('./configuration/MongoConnection');
+const expressValidator = require('express-validator');
 
 /* ------------ Choosing Env ------------ */
 if (process.env.NODE === 'production' || process.env.NODE_ENV === 'staging') {
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors());
+app.use(expressValidator());
 /* ------------ Connecting to db ------------ */
 mongoConnection(process.env.MONGO_URI);
 /* ------------ Testing Backend ------------ */
@@ -25,7 +27,7 @@ app.get('/', async (req, res) => {
     res.send('works just fine').status(200);
 });
 /* ------------ Importing Routes ------------ */
-const wordRouter = require('./routes/wordRouter');
+ const wordRouter = require('./routes/wordRouter');
 const languageRouter = require('./routes/languageRouter');
 app.use('/words', wordRouter);
 app.use('/languages', languageRouter);

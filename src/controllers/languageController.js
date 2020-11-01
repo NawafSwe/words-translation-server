@@ -60,11 +60,11 @@ const getLanguageById = async (id) => {
 /* ---------- Exporting Functions ---------- */
 /**
  * * A module that control language collection from the database.
- * @exports {{deleteLanguage: (function(id): Promise<Object>),
+ * @exports {{deleteLanguage: (function(String): Promise<Object>),
  * getLanguages: (function(): Promise<Object>),
- * putLanguage: (function(id, body): Promise<Object>),
- * getLanguageById: (function(id): Promise<Object>),
- * getLanguageByCode: (function(code): Promise<Object>)}}
+ * putLanguage: (function(String, Object): Promise<Object>),
+ * getLanguageById: (function(String): Promise<Object>),
+ * getLanguageByCode: (function(String): Promise<Object>)}}
  */
 module.exports = {
     getLanguages, getLanguageByCode,

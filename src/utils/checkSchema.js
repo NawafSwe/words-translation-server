@@ -7,7 +7,7 @@
  * @export
  * @function
  * @name validateSchema.
- * @param {list}  schemas - list hold all the schema of a particular request.
+ * @param {Array<String>}  schemas - list hold all the schema of a particular request.
  * @param {Object} request - request Object that holds the request body.
  * @returns {boolean} if there is no error.
  * @returns {Error} if there is an error.
