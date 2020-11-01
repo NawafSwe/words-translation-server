@@ -4,6 +4,9 @@ const route = express.Router();
 const wordController = require('../controllers/wordController');
 const sanitizerHelper = require('../helpers/sanitizerHelperFunctions');
 const sanitizer = require('express-sanitizer');
+const validate = require('../utils/wordsValidators');
+const {validationResult} = require('express-validator/check');
+
 
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
@@ -19,10 +22,15 @@ route.get('/', async (req, res) => {
     }
 });
 
-route.post('/', async (req, res) => {
-    // await sanitizerHelper.sanitizeWord(req);
-    const response = await wordController.postWord(req.body);
-    res.json(response).status(200);
+route.post('/', validate('postWord'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        await sanitizerHelper.sanitizeWord(req);
+        const response = await wordController.postWord(req.body);
+        res.json(response).status(200);
+    }
 });
 
 route.delete('/:id', async (req, res) => {

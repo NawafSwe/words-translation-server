@@ -5,11 +5,10 @@
  * @name sanitizeWord
  * @param { Request<P, ResBody, ReqBody, ReqQuery>} req request holds the body to be sanitized
  * @returns {VoidFunction} returns void.
- * @description sanitizing the body of a request
+ * @description sanitizing the body of a request if it is contains scripts will remove it
  */
 const sanitizeWord = async (req) => {
     try {
-        //for case <script>key</script> it fails
         // checking the content of the request to avoid errors
         if (req.body.key) {
             req.body.key = req.sanitize(req.body.key);
