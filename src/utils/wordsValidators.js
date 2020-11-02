@@ -57,7 +57,9 @@ const validate = (method) => {
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
 
+                /* ------------------- ID Validation ------------------- */
                 param('id').isMongoId()
+                /* -------------------END OF ID Validation ------------------- */
             ];
 
         }
@@ -71,7 +73,9 @@ const validate = (method) => {
             })
             /* ------------------- End Of Schema Validation ------------------- */
 
+            /* ------------------- ID Validation ------------------- */
             param('id').isMongoId()
+            /* -------------------END OF ID Validation ------------------- */
         }
         case 'postWord': {
             return [
@@ -83,7 +87,6 @@ const validate = (method) => {
                     }
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
-                param('id').isMongoId(),
 
                 /* ------------------- Key Validation ------------------- */
                 body('key', 'key cannot be empty string').not().equals(''),
@@ -118,6 +121,9 @@ const validate = (method) => {
                     }
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
+                /* ------------------- ID Validation ------------------- */
+                param('id').isMongoId(),
+                /* -------------------END OF ID Validation ------------------- */
 
                 /* ------------------- Key Validation ------------------- */
                 body('key', 'key cannot be empty string').optional().not().equals(''),

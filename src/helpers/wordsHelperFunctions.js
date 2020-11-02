@@ -19,6 +19,7 @@
  */
 const versionFormatter = async (wordKey, editor, timestamp, translations) => {
     try {
+        const version = {};
         return {
             key: wordKey,
             edits: {
@@ -31,6 +32,8 @@ const versionFormatter = async (wordKey, editor, timestamp, translations) => {
         console.log(`error occurred in the wordHelpersFunctions error: ${error}`);
     }
 }
+
+
 /* ---------- Exporting Functions ---------- */
 /**
  * module exports function format the version of word update.

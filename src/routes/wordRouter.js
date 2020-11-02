@@ -175,8 +175,8 @@ route.put('/:id', validate('putWordById'), async (req, res) => {
 
     } else {
         //including the id of the word inside the body
-        req.body.id = req.params.id;
-        const response = await wordController.postWord(req.body);
+        // req.body.id = req.params.id;
+        const response = await wordController.putWordById(req.params.id, req.body);
         res.json(response).status(200);
     }
 });

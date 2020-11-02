@@ -26,7 +26,7 @@ const translationHelper = require('../helpers/wordsHelperFunctions');
  * @async
  * @function
  * @name getWords.
- * @returns {Promise<Response>} response contains all words with its translations from the database.
+ * @returns {Promise<Arra<<Word>>>} response contains all words with its translations from the database.
  * @throws {Error} may throw an error if failuer occuured.
  * @description get all words with its translations from the database.
  */
@@ -44,7 +44,7 @@ const getWords = async () => {
  * @function
  * @name postWord.
  * @param {Object} body contains the data about the word.
- * @returns {Promise<Object>} returns the object that added to the database.
+ * @returns {Promise<Object<Word>>} returns the object that added to the database.
  * @throws {Error} throws an error during the process if there is an error.
  * @description posting new word to the database.
  */
@@ -53,7 +53,7 @@ const postWord = async (body) => {
     try {
         //checking if the word is pre-exist in the db or not
         if (body.id) {
-            console.log(`id here ${id}`);
+            console.log(`id here ${body.id} and the hole body is \n ${body}`);
             return null;
         } else {
             //if id not included means the request was post request
@@ -81,7 +81,7 @@ const postWord = async (body) => {
  * @function
  * @name deleteWord.
  * @param {String} id of the word.
- * @returns {Promise<Object>} returns the deleted word from the database.
+ * @returns {Promise<Object<Word>>}returns the deleted word from the database.
  * @throws {Error} throws an error if there is an error.
  * @description delete a word from the database.
  */
@@ -100,7 +100,7 @@ const deleteWord = async (id) => {
  * @function
  * @name getWordById.
  * @param {String} id of the word.
- * @returns {Promise<Object>} returns a word from the database.
+ * @returns {Promise<Object<Word>>} returns a word from the database.
  * @throws {Error} throws an error if there is an error.
  * @description get word from the database by id.
  */
@@ -119,26 +119,25 @@ const getWordById = async (id) => {
  * @function
  * @name putWordById.
  * @param {String} id of the word.
- * @returns {Promise<Object>} returns the updated word from the database.
+ * @returns {Promise<Object<Word>>} returns the updated word from the database.
  * @throws {Error} throws an error if there is an error.
  * @description update a word from the database by id.
  */
 const putWordById = async (id, body) => {
     try {
-        const response = await Word.findByIdAndUpdate(id, body);
+        const response = await Word.findById(id);
+        const wordKey = body.key ? body.key : response.key;
+        const oldTranslation = response.translations;
+        const updatedTranslation = {...oldTranslation, ...body.translations};
+        response.translations = updatedTranslation;
+        await response.save();
+        const editor = body.edits.editor;
+        const timestamp = body.edits.timestamp;
+        //const oldVersion = translationHelper.versionFormatter();
+
         return response;
     } catch (error) {
         console.log(`error ouccurred in wordController at putWordById error ${error}`);
-    }
-}
-
-const putWordByKey = async (key, body) => {
-    try {
-        const response = await Word.find({key: key});
-        //checking the content of the body
-
-    } catch (error) {
-        console.log(`error occurred in the wordController at putWordByKey() error: ${error}`);
     }
 }
 
@@ -146,11 +145,7 @@ const putWordByKey = async (key, body) => {
 /**
  * A module contains all functions have the controlls of word collection in the database
  * @exports
- * @type{{getWordById: (function(String): Promise<Object>),
- * postWord: (function(Object): Promise<Object>),
- * deleteWord: (function(String): Promise<Object>),
- * getWords: (function(): Promise<Response>),
- * putWordById: (function(String, *=): Promise<Object>)}}
+ * @type {{getWordById: (function(String): Promise<Object<Word>>), postWord: (function(Object): Promise<Object<Word>>), deleteWord: (function(String): Promise<Object<Word>>), getWords: (function(): Promise<*|undefined>), putWordById: (function(String, *): Promise<Object<Word>>)}}
  */
 module.exports = {
     getWords,
