@@ -1,3 +1,7 @@
+/**
+ * The functionalities of formatting a body for word collection.
+ * @module helpers/wordsHelperFunctions
+ */
 /* ------------------- Functions ------------------- */
 
 /** @author Nawaf Alsharqi
@@ -30,6 +34,7 @@ const versionFormatter = async (wordKey, editor, timestamp, translations) => {
 /* ---------- Exporting Functions ---------- */
 /**
  * module exports function format the version of word update.
- * @exports {{versionFormatter: (function(String, String, Number, Object): Promise<Object>)}}
+ * @exports
+ * @type {{versionFormatter: (function(String, String, Number, Object): Promise<Object>)}}
  */
 module.exports = {versionFormatter};

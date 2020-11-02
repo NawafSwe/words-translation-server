@@ -1,5 +1,24 @@
+/**
+ * The functionalities of the word collection.
+ * @module controllers/wordController
+ * @requires Word
+ * @requires translationHelper
+ */
 /* ---------- Importing Packages ---------- */
+/**
+ * Word mongoose collection.
+ * @type {Object<Word>}
+ * @const
+ * @namespace Word
+ */
 const Word = require('../models/word');
+
+/**
+ * translation helper that have function to format the version object
+ * @type {Object}
+ * @const
+ * @namespace translationHelper
+ */
 const translationHelper = require('../helpers/wordsHelperFunctions');
 
 /* ------------------- Functions ------------------- */
@@ -30,6 +49,7 @@ const getWords = async () => {
  * @description posting new word to the database.
  */
 const postWord = async (body) => {
+    //change the process using the id if found update otherwise create
     try {
         //extracting the data to format everything.
         const wordKey = body.key;
@@ -97,7 +117,22 @@ const getWordById = async (id) => {
  */
 const putWordById = async (id, body) => {
     try {
-        const response = await Word.findByIdAndUpdate(id, body);
+        // const response = await Word.findByIdAndUpdate(id, body);
+        // return response;
+
+        //extracting the data to format everything.
+        const wordKey = body.key;
+        const translations = body.translations;
+        const editsData = body.edits;
+        const timestamp = editsData.timestamp;
+        const editor = editsData.editor;
+        //find by id and update
+        const response = await Word.create({key: wordKey, translations: translations});
+        //forming the edits version
+        editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
+        await response.edits.push(editsData);
+        await response.save();
+        //returning the word with its data
         return response;
     } catch (error) {
         console.log(`error ouccurred in wordController at putWordById error ${error}`);
@@ -117,7 +152,8 @@ const putWordByKey = async (key, body) => {
 /* ---------- Exporting Functions ---------- */
 /**
  * A module contains all functions have the controlls of word collection in the database
- * @exports {{getWordById: (function(String): Promise<Object>),
+ * @exports
+ * @type{{getWordById: (function(String): Promise<Object>),
  * postWord: (function(Object): Promise<Object>),
  * deleteWord: (function(String): Promise<Object>),
  * getWords: (function(): Promise<Response>),

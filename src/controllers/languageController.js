@@ -1,4 +1,17 @@
+/**
+ * The functionalities of the language collection.
+ * @module controllers/languageController
+ * @requires Language
+ */
+
 /* ---------- Importing Packages ---------- */
+/**
+ * Language mongoose collection.
+ * @type {Object<Language>}
+ * @const
+ * @namespace Language
+ */
+
 const Language = require('../models/language');
 
 /* ------------------- Functions ------------------- */
@@ -60,7 +73,8 @@ const getLanguageById = async (id) => {
 /* ---------- Exporting Functions ---------- */
 /**
  * * A module that control language collection from the database.
- * @exports {{deleteLanguage: (function(String): Promise<Object>),
+ * @exports
+ * @type {{deleteLanguage: (function(String): Promise<Object>),
  * getLanguages: (function(): Promise<Object>),
  * putLanguage: (function(String, Object): Promise<Object>),
  * getLanguageById: (function(String): Promise<Object>),

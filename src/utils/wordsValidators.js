@@ -1,10 +1,28 @@
-/* ------------------- EXPLANATION -------------------
- since all the routes are following the RESTFUL API naming so based on the name of the function in the route
- will goes into the switch case as a case.
-*/
+/**
+ *  since all the routes are following the RESTFUL API naming so based on the name of the function in the route
+ * will goes into the switch case as a case.
+ * @module utils/wordsValidators
+ * @requires body
+ * @requires param
+ * @requires validateSchema
+ */
 
+/**
+ * body and param of type express validator module to check the request param and body
+ * @type {Object}
+ * @const
+ * @namespace body
+ * @namespace param
+ */
 const {body, param} = require('express-validator/check');
+/**
+ * Object that holds functions to validate request schema and queries of giving request
+ * @type {Object}
+ * @const
+ * @namespace validateSchema
+ */
 const validateSchema = require('./checkSchema');
+
 
 /** @author Nawaf Alsharqi.
  * @function
@@ -13,7 +31,6 @@ const validateSchema = require('./checkSchema');
  * @throws {Error} throws an error if there is an error.
  * @description validate request before miss with the database.
  */
-
 const validate = (method) => {
     switch (method) {
 
@@ -37,9 +54,10 @@ const validate = (method) => {
                     if (validateSchema(schemas, req)) {
                         return true;
                     }
-                })
+                }),
                 /* ------------------- End Of Schema Validation ------------------- */
 
+                param('id').isMongoId()
             ];
 
         }
@@ -53,7 +71,7 @@ const validate = (method) => {
             })
             /* ------------------- End Of Schema Validation ------------------- */
 
-
+            param('id').isMongoId()
         }
         case 'postWord': {
             return [
@@ -65,7 +83,7 @@ const validate = (method) => {
                     }
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
-
+                param('id').isMongoId(),
 
                 /* ------------------- Key Validation ------------------- */
                 body('key', 'key cannot be empty string').not().equals(''),
@@ -127,4 +145,9 @@ const validate = (method) => {
     }
 };
 /* ------------------- Exporting Function ------------------- */
+/**
+ * module that exports a function to validate word collection requests
+ * @exports
+ * @type {function(String): ([this]|[this, this]|*)}
+ */
 module.exports = validate;

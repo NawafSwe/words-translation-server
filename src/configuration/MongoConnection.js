@@ -1,4 +1,15 @@
+/** Express router providing word related routes
+ * @module configuration/MongoConnection
+ * @requires mongoose
+ */
+
 /* ------------ Requiring Packages ------------ */
+/**
+ * mongoose module
+ * @type {Mongoose}
+ * @const
+ * @namespace mongoose
+ */
 const mongoose = require('mongoose');
 
 /* ------------------- Functions ------------------- */
@@ -32,6 +43,7 @@ const connect = (uri) => {
 /* ------------------- Exporting Function ------------------- */
 /**
  * A module contains function to connect to the database.
- * @exports {function(String): VoidFunction}
+ * @exports
+ * @type {function(String): VoidFunction}
  */
 module.exports = connect;

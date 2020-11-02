@@ -1,6 +1,11 @@
 /** Express router providing language related routes
  * @module routes/languageRouter
  * @requires express
+ * @requires validate
+ * @requires sanitizer
+ * @requires sanitizerHelper
+ * @requires validationResult
+ * @requires languageController
  */
 /* ---------- Importing Packages ---------- */
 /**
@@ -129,6 +134,7 @@ route.delete('/:id', async (req, res) => {
 
 /**
  * module exports the router for language collections.
- * @exports {Object}
+ * @exports
+ * @type {Object}
  */
 module.exports = route;

@@ -23,7 +23,8 @@ const Language = mongoose.model('Language', languageSchema);
 /* ---------- Exporting Model ---------- */
 /**
  * module for Language collection.
- * @exports Language mongoDB Model
+ * @exports
+ * @type {Object<Language>}
  */
 module.exports = Language;
 

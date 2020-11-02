@@ -1,11 +1,17 @@
 /** Express router providing word related routes
  * @module routes/wordRouter
  * @requires express
+ * @requires validate
+ * @requires sanitizer
+ * @requires sanitizerHelper
+ * @requires validationResult
+ * @requires wordController
  */
 /* ------------ Requiring Packages ------------ */
 /**
  * express module
  * @const
+ * @namespace express
  */
 const express = require('express');
 
@@ -20,7 +26,7 @@ const route = express.Router();
 
 /**
  *  express sanitizer used to sanitize a request from html tags and script injection.
- * @type {object}
+ * @type {Object}
  * @const
  * @namespace sanitizer
  */
@@ -47,6 +53,7 @@ const validate = require('../utils/wordsValidators');
 /**
  *  express validation result object holds the result after validation a request using express validator.
  * @const
+ * @type {Object}
  * @namespace validationResult
  */
 const {validationResult} = require('express-validator/check');
@@ -54,7 +61,7 @@ const {validationResult} = require('express-validator/check');
 
 /**
  *  wordController object have functions to call the database to do words CURD operation.
- * @type {object}
+ * @type {Object}
  * @const
  * @namespace wordController
  */
@@ -174,6 +181,7 @@ route.put('/:id', validate('putWordById'), async (req, res) => {
 
 /**
  * module exports the router for words collections.
- * @exports {Object}
+ * @exports
+ * @type {Object}
  */
 module.exports = route;
