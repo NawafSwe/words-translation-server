@@ -181,6 +181,7 @@ route.put('/:id', validate('putWordById'), async (req, res) => {
 
 /**
  * module exports the router for words collections.
- * @exports {Object}
+ * @exports
+ * @type {Object}
  */
 module.exports = route;

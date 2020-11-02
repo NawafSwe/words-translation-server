@@ -1,8 +1,7 @@
-/*          ------------------- EXPLANATION -------------------
- since all the request must has validation schema a separate file created to check the schema of a request;
-*/
-
-/* ------------------- Functions ------------------- */
+/**
+ * since all the request must has validation schema a separate file created to check the schema of a request
+ * @module utils/checkSchema
+ */
 
 /** @author Nawaf Alsharqi
  * @export
@@ -11,7 +10,7 @@
  * @param {Array<String>}  schemas - list hold all the schema of a particular request.
  * @param {Object} request - request Object that holds the request body.
  * @returns {boolean} if there is no error.
- * @returns {Error} if there is an error.
+ * @throws {Error} if there is an error.
  * @description validates the schema of a request.
  */
 function validateSchema(schemas, request) {
@@ -27,8 +26,11 @@ function validateSchema(schemas, request) {
         }
     }
     //if there is an error throw with all unRequired schemas else return  by checking if the unRequiredSchemas length is zero;;
-    if (unRequiredSchemas.length == 0) return true;
-    else throw new Error(`invalid queries [${unRequiredSchemas}] were included in the request`);
+    if (unRequiredSchemas.length === 0) {
+        return true;
+    } else {
+        throw new Error(`invalid queries [${unRequiredSchemas}] were included in the request`);
+    }
 }
 
 /** @author Nawaf Alsharqi
@@ -38,7 +40,7 @@ function validateSchema(schemas, request) {
  * @param {Array<String>}  queries - list hold all the schema of a particular request.
  * @param {Object} request - request Object that holds the request query.
  * @returns {boolean} if there is no error.
- * @returns {Error} if there is an error.
+ * @throws {Error} if there is an error.
  * @description validates the query of a request url
  */
 function validateQuery(queries, request) {
@@ -54,12 +56,16 @@ function validateQuery(queries, request) {
         }
     }
     //if there is an error throw with all unRequired schemas else return  by checking if the unRequiredSchemas length is zero;;
-    if (unRequiredQueries.length == 0) return true;
-    else throw new Error(`invalid queries [${unRequiredQueries}] were included in the request`);
+    if (unRequiredQueries.length === 0) {
+        return true;
+    } else {
+        throw new Error(`invalid queries [${unRequiredQueries}] were included in the request`);
+    }
 }
 
 /**
- *
- * @exports {function(Array<String>, Object): Error}
+ * module that contains functions to validate schema and quires
+ * @exports
+ * @type {function(Array<String>, Object): Error}
  */
 module.exports = validateSchema;
