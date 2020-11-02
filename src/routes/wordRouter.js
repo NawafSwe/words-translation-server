@@ -16,13 +16,15 @@ const express = require('express');
  * @namespace route
  */
 const route = express.Router();
+
+
 /**
- *  wordController object have functions to call the database to do words CURD operation.
+ *  express sanitizer used to sanitize a request from html tags and script injection.
  * @type {object}
  * @const
- * @namespace wordController
+ * @namespace sanitizer
  */
-const wordController = require('../controllers/wordController');
+const sanitizer = require('express-sanitizer');
 
 /**
  *  sanitizerHelper object have functions to sanitize request.
@@ -32,13 +34,6 @@ const wordController = require('../controllers/wordController');
  */
 const sanitizerHelper = require('../helpers/sanitizerHelperFunctions');
 
-/**
- *  express sanitizer used to sanitize a request from html tags and script injection.
- * @type {object}
- * @const
- * @namespace sanitizer
- */
-const sanitizer = require('express-sanitizer');
 
 /**
  *  validate object has functions to validate requests before going to mess with database.
@@ -50,22 +45,32 @@ const sanitizer = require('express-sanitizer');
 const validate = require('../utils/wordsValidators');
 
 /**
- *  express validation result object holds the result after validation a request using expres validator.
- * @type {ResultFactory}
+ *  express validation result object holds the result after validation a request using express validator.
  * @const
  * @namespace validationResult
  */
 const {validationResult} = require('express-validator/check');
 
+
+/**
+ *  wordController object have functions to call the database to do words CURD operation.
+ * @type {object}
+ * @const
+ * @namespace wordController
+ */
+const wordController = require('../controllers/wordController');
+
+
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
 
 /* ---------- Routing ---------- */
+
 /**
  * Route getting all words.
  * @name get/words
  * @function
- * @memberof module:routes/words~route
+ * @memberOf module:routes/wordRouter~route
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express validator middleware.
@@ -84,7 +89,7 @@ route.get('/', validate('getWords'), async (req, res) => {
  * Route post new word.
  * @name post/words
  * @function
- * @memberof module:routes/words~route
+ * @memberOf module:routes/wordRouter~route
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express validator middleware.
@@ -104,9 +109,9 @@ route.post('/', validate('postWord'), async (req, res) => {
 
 /**
  * Route delete word by id.
- * @name delete/words
+ * @name delete/words/:id
  * @function
- * @memberof module:routes/words~route
+ * @memberOf module:routes/wordRouter~route
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express validator middleware.
@@ -125,9 +130,9 @@ route.delete('/:id', validate('deleteWordById'), async (req, res) => {
 
 /**
  * Route get word by id.
- * @name delete/words
+ * @name delete/words/:id
  * @function
- * @memberof module:routes/words~route
+ * @memberOf module:routes/wordRouter~route
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express validator middleware.
@@ -148,9 +153,9 @@ route.get('/:id', validate('getWordById'), async (req, res) => {
 
 /**
  * Route update word by id.
- * @name put/words
+ * @name put/words/:id
  * @function
- * @memberof module:routes/words~route
+ * @memberOf module:routes/wordRouter~route
  * @inner
  * @param {string} path - Express path
  * @param {callback} middleware - Express validator middleware.
@@ -169,6 +174,6 @@ route.put('/:id', validate('putWordById'), async (req, res) => {
 
 /**
  * module exports the router for words collections.
- * @exports {Router}
+ * @exports {Object}
  */
 module.exports = route;

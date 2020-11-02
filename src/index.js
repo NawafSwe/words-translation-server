@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
     res.send('works just fine').status(200);
 });
 /* ------------ Importing Routes ------------ */
- const wordRouter = require('./routes/wordRouter');
+const wordRouter = require('./routes/wordRouter');
 const languageRouter = require('./routes/languageRouter');
 app.use('/words', wordRouter);
 app.use('/languages', languageRouter);
