@@ -11,9 +11,10 @@ const {validationResult} = require('express-validator/check');
 route.use(sanitizer());
 
 /* ---------- Routing ---------- */
-route.get('/', async (req, res) => {
-    if (false) {
-
+route.get('/', validate('getWords'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
     } else {
         const response = await wordController.getWords();
         res.json(response).status(200);
@@ -31,28 +32,39 @@ route.post('/', validate('postWord'), async (req, res) => {
     }
 });
 
-route.delete('/:id', async (req, res) => {
-    const response = await wordController.deleteWord(req.params.id);
-    res.json(response).status(200);
+route.delete('/:id', validate('deleteWordById'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        const response = await wordController.deleteWord(req.params.id);
+        res.json(response).status(200);
+    }
 });
 
-route.get('/:id', async (req, res) => {
-    const id = req.params.id;
-    const response = await wordController.getWordById(id);
-    res.json(response).status(200);
+route.get('/:id', validate('getWordById'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        const id = req.params.id;
+        const response = await wordController.getWordById(id);
+        res.json(response).status(200);
+    }
 
 });
-route.put('/:id', async (req, res) => {
-    //we need to agree on the process here if in the front-end who doing the call is he gonna pass only the new translation? or all and the new one
-    //my approach will consider it as he gonna pass only one info about the translation list
-    // req.body.key = req.sanitize(req.body.key);
-    // //if translation included
-    // if (req.body.translations) {
-    //     req.body.translations.lang = req.sanitize(req.body.translations.lang);
-    //     req.body.translations.lang = req.sanitize(req.body.translations.word);
-    // }
+route.put('/:id',validate('putWordById') ,async (req, res) => {
+    const err = validationResult(req);
+    if(!err.isEmpty()){
+        res.send(err.mapped()).status(400);
+
+    }else{
     const response = await wordController.putWordById(id, req.body);
     res.json(response).status(200);
+     }
 });
-
+/**
+ * module exports the router for words collections.
+ * @exports {Router}
+ */
 module.exports = route;

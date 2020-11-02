@@ -22,4 +22,8 @@ const wordSchema = mongoose.Schema({
 /* ------------ Creating Word Model ------------ */
 const Word = mongoose.model('Word', wordSchema);
 /* ---------- Exporting Model ---------- */
+/**
+ * module for Word collection.
+ * @exports Word mongoDB Model
+ */
 module.exports = Word;

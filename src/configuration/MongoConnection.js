@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 /* ------------------- Functions ------------------- */
 /** @author Nawaf Alsharqi
- * @exports
  * @async
  * @function
  * @name connect
@@ -31,4 +30,8 @@ const connect = (uri) => {
     }
 };
 /* ------------------- Exporting Function ------------------- */
+/**
+ * A module contains function to connect to the database.
+ * @exports {function(String): VoidFunction}
+ */
 module.exports = connect;

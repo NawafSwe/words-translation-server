@@ -13,5 +13,9 @@ const languageSchema = mongoose.Schema({
 /* ------------ Creating Mongoose Model ------------ */
 const Language = mongoose.model('Language', languageSchema);
 /* ---------- Exporting Model ---------- */
+/**
+ * module for Language collection.
+ * @exports Language mongoDB Model
+ */
 module.exports = Language;
 

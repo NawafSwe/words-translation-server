@@ -1,6 +1,7 @@
 /*          ------------------- EXPLANATION -------------------
  since all the request must has validation schema a separate file created to check the schema of a request;
 */
+
 /* ------------------- Functions ------------------- */
 
 /** @author Nawaf Alsharqi
@@ -30,11 +31,11 @@ function validateSchema(schemas, request) {
     else throw new Error(`invalid queries [${unRequiredSchemas}] were included in the request`);
 }
 
-/**@author Nawaf Alsharqi
+/** @author Nawaf Alsharqi
  * @export
  * @function
  * @name validateQuery.
- * @param {list}  queries - list hold all the schema of a particular request.
+ * @param {Array<String>}  queries - list hold all the schema of a particular request.
  * @param {Object} request - request Object that holds the request query.
  * @returns {boolean} if there is no error.
  * @returns {Error} if there is an error.
@@ -57,4 +58,8 @@ function validateQuery(queries, request) {
     else throw new Error(`invalid queries [${unRequiredQueries}] were included in the request`);
 }
 
+/**
+ *
+ * @exports {function(Array<String>, Object): Error}
+ */
 module.exports = validateSchema;
