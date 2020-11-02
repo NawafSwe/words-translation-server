@@ -1,4 +1,4 @@
-/** Express router providing word related routes
+/** Mongo Db Connection module
  * @module configuration/MongoConnection
  * @requires mongoose
  */

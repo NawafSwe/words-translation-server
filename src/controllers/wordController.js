@@ -51,19 +51,27 @@ const getWords = async () => {
 const postWord = async (body) => {
     //change the process using the id if found update otherwise create
     try {
-        //extracting the data to format everything.
-        const wordKey = body.key;
-        const translations = body.translations;
-        const editsData = body.edits;
-        const timestamp = editsData.timestamp;
-        const editor = editsData.editor;
-        const response = await Word.create({key: wordKey, translations: translations});
-        //forming the edits version
-        editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
-        await response.edits.push(editsData);
-        await response.save();
-        //returning the word with its data
-        return response;
+        //checking if the word is pre-exist in the db or not
+        if (body.id) {
+            console.log(`id here ${id}`);
+            return null;
+        } else {
+            //if id not included means the request was post request
+            //extracting the data to format everything.
+            const wordKey = body.key;
+            const translations = body.translations;
+            const editsData = body.edits;
+            const timestamp = editsData.timestamp;
+            const editor = editsData.editor;
+            const response = await Word.create({key: wordKey, translations: translations});
+            //forming the edits version
+            editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
+            await response.edits.push(editsData);
+            await response.save();
+            //returning the word with its data
+            return response;
+        }
+
     } catch (error) {
         console.log(`error happened in word controller at postWord() error: ${error}`);
     }
@@ -117,22 +125,7 @@ const getWordById = async (id) => {
  */
 const putWordById = async (id, body) => {
     try {
-        // const response = await Word.findByIdAndUpdate(id, body);
-        // return response;
-
-        //extracting the data to format everything.
-        const wordKey = body.key;
-        const translations = body.translations;
-        const editsData = body.edits;
-        const timestamp = editsData.timestamp;
-        const editor = editsData.editor;
-        //find by id and update
-        const response = await Word.create({key: wordKey, translations: translations});
-        //forming the edits version
-        editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
-        await response.edits.push(editsData);
-        await response.save();
-        //returning the word with its data
+        const response = await Word.findByIdAndUpdate(id, body);
         return response;
     } catch (error) {
         console.log(`error ouccurred in wordController at putWordById error ${error}`);
