@@ -19,7 +19,7 @@ const wordSchema = mongoose.Schema({
         //editor: which is the user who edited the key
         editor: {type: String,},
         //version: which is the copy of the translation
-        version: {},
+        version: {type: Object},
         //timestamp: which is the time was edited
         timestamp: {type: Number}
     }],
