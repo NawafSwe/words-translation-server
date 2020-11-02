@@ -1,6 +1,11 @@
 /** Express router providing language related routes
  * @module routes/languageRouter
  * @requires express
+ * @requires validate
+ * @requires sanitizer
+ * @requires sanitizerHelper
+ * @requires validationResult
+ * @requires languageController
  */
 /* ---------- Importing Packages ---------- */
 /**

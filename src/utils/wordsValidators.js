@@ -37,9 +37,10 @@ const validate = (method) => {
                     if (validateSchema(schemas, req)) {
                         return true;
                     }
-                })
+                }),
                 /* ------------------- End Of Schema Validation ------------------- */
 
+                param('id').isMongoId()
             ];
 
         }
@@ -53,7 +54,7 @@ const validate = (method) => {
             })
             /* ------------------- End Of Schema Validation ------------------- */
 
-
+            param('id').isMongoId()
         }
         case 'postWord': {
             return [
@@ -65,7 +66,7 @@ const validate = (method) => {
                     }
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
-
+                param('id').isMongoId(),
 
                 /* ------------------- Key Validation ------------------- */
                 body('key', 'key cannot be empty string').not().equals(''),

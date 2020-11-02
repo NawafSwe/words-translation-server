@@ -1,4 +1,15 @@
+/** Express router providing word related routes
+ * @module configuration/MongoConnection
+ * @requires mongoose
+ */
+
 /* ------------ Requiring Packages ------------ */
+/**
+ * mongoose module
+ * @type {Mongoose}
+ * @const
+ * @namespace mongoose
+ */
 const mongoose = require('mongoose');
 
 /* ------------------- Functions ------------------- */

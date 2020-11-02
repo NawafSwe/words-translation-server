@@ -1,3 +1,7 @@
+/**
+ * The functionalities of formatting a body for word collection.
+ * @module helpers/wordsHelperFunctions
+ */
 /* ------------------- Functions ------------------- */
 
 /** @author Nawaf Alsharqi

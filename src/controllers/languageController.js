@@ -1,4 +1,17 @@
+/**
+ * The functionalities of the language collection.
+ * @module controllers/languageController
+ * @requires Language
+ */
+
 /* ---------- Importing Packages ---------- */
+/**
+ * Language mongoose collection.
+ * @type {Object<Language>}
+ * @const
+ * @namespace Language
+ */
+
 const Language = require('../models/language');
 
 /* ------------------- Functions ------------------- */

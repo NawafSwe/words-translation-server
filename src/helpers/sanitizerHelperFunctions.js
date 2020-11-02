@@ -1,3 +1,8 @@
+/**
+ * The functionalities of sanitizing request.
+ * @module helpers/sanitizerHelperFunctions
+ */
+
 /* ------------ Functions------------ */
 /** @author Nawaf Alsharqi
  * @async
