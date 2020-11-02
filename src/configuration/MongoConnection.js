@@ -43,6 +43,7 @@ const connect = (uri) => {
 /* ------------------- Exporting Function ------------------- */
 /**
  * A module contains function to connect to the database.
- * @exports {function(String): VoidFunction}
+ * @exports
+ * @type {function(String): VoidFunction}
  */
 module.exports = connect;

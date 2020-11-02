@@ -25,6 +25,7 @@ const User = mongoose.model('User', userSchema);
 
 /**
  * module for User collection.
- * @exports User mongoDB Model
+ * @exports
+ * @type {Object<User>}
  */
 module.exports = User;

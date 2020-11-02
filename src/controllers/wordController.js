@@ -152,7 +152,8 @@ const putWordByKey = async (key, body) => {
 /* ---------- Exporting Functions ---------- */
 /**
  * A module contains all functions have the controlls of word collection in the database
- * @exports {{getWordById: (function(String): Promise<Object>),
+ * @exports
+ * @type{{getWordById: (function(String): Promise<Object>),
  * postWord: (function(Object): Promise<Object>),
  * deleteWord: (function(String): Promise<Object>),
  * getWords: (function(): Promise<Response>),

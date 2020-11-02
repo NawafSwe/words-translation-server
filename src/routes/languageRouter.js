@@ -134,6 +134,7 @@ route.delete('/:id', async (req, res) => {
 
 /**
  * module exports the router for language collections.
- * @exports {Object}
+ * @exports
+ * @type {Object}
  */
 module.exports = route;

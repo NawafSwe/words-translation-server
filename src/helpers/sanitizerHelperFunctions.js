@@ -59,7 +59,8 @@ const sanitizeLanguage = async (req) => {
 }
 /**
  * module that exports sanitizers functions for requests.
- * @exprts {{sanitizeWord: (function(Request<P, ResBody, ReqBody, ReqQuery>): VoidFunction),
+ * @exprts
+ * @type {{sanitizeWord: (function(Request<P, ResBody, ReqBody, ReqQuery>): VoidFunction),
  * sanitizeLanguage: (function(Request<P, ResBody, ReqBody, ReqQuery>): VoidFunction)}}
  */
 module.exports = {sanitizeWord, sanitizeLanguage};

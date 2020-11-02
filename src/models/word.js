@@ -33,6 +33,7 @@ const Word = mongoose.model('Word', wordSchema);
 /* ---------- Exporting Model ---------- */
 /**
  * module for Word collection.
- * @exports Word mongoDB Model
+ * @exports
+ * @type {Object<Word>}
  */
 module.exports = Word;
