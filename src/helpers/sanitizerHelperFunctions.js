@@ -28,14 +28,33 @@ const sanitizeWord = async (req) => {
         console.log(`error occurred in the SanitizerHelpers at sanitizeWord() error: ${error}`);
     }
 }
+/** @author Nawaf Alsharqi
+ * @async
+ * @function
+ * @name sanitizeLanguage
+ * @param { Request<P, ResBody, ReqBody, ReqQuery>} req request holds the body to be sanitized
+ * @returns {VoidFunction} returns void.
+ * @description sanitizing the body of a request if it is contains scripts will remove it
+ */
 const sanitizeLanguage = async (req) => {
     try {
         if (req.body.title) {
             req.body.title = req.sanitize(req.body.title);
+        }
+        if (req.body.code) {
+            req.body.code = req.sanitize(req.body.code);
+        }
+        if (req.bod.direction) {
+            req.body.direction = req.sanitize(req.bod.direction);
         }
 
     } catch (error) {
         console.log(`error occurred in the SanitizerHelpers at sanitizeLanguage() error: ${error} `);
     }
 }
-module.exports = {sanitizeWord, sanitizeWord};
+/**
+ * module that exports sanitizers functions for requests.
+ * @exprts {{sanitizeWord: (function(Request<P, ResBody, ReqBody, ReqQuery>): VoidFunction),
+ * sanitizeLanguage: (function(Request<P, ResBody, ReqBody, ReqQuery>): VoidFunction)}}
+ */
+module.exports = {sanitizeWord, sanitizeLanguage};

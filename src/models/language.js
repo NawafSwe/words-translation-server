@@ -1,7 +1,15 @@
+/**
+ * The data-layer for a Language
+ * @module language
+ */
 /* ------------ Requiring Packages ------------ */
 const mongoose = require('mongoose');
 /* ------------ Creating Schemas edited By ------------ */
 
+/**
+ * Language schema
+ * @constructor Language
+ */
 const languageSchema = mongoose.Schema({
     //title: language title such saudi arabia
     title: {type: String, require: true},

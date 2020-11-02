@@ -1,7 +1,16 @@
+/**
+ * The data-layer for a Word
+ * @module word
+ */
+
 /* ------------ Requiring Packages ------------ */
 const mongoose = require('mongoose');
 /* ------------ Creating Schemas edited By ------------ */
 // later we can support orgs as => org : {ref org collection}
+/**
+ * Word schema , also contains edits.
+ * @constructor Word
+ */
 const wordSchema = mongoose.Schema({
     //key: represents the main word itself
     key: {type: String, require: true},

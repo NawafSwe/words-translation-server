@@ -1,3 +1,7 @@
+/**
+ * The data-layer for a Word
+ * @module user
+ */
 //user can have
 //avatar url
 //name
@@ -5,6 +9,10 @@
 /* ------------ Requiring Packages ------------ */
 const mongoose = require('mongoose');
 /* ------------ Creating Schemas ------------ */
+/**
+ * User schema.
+ * @constructor User
+ */
 const userSchema = mongoose.Schema({
     //name: name of the user
     name: {type: String, required: true},

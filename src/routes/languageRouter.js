@@ -3,6 +3,7 @@ const express = require('express');
 const route = express.Router();
 const languageController = require('../controllers/languageController');
 const sanitizer = require('express-sanitizer');
+const sanitizerHelper = require('../helpers/sanitizerHelperFunctions');
 
 /* ------------ Route Config ------------ */
 route.use(sanitizer());
