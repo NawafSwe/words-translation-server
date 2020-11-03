@@ -126,8 +126,12 @@ const getWordById = async (id) => {
 const putWordById = async (id, body) => {
     try {
         const response = await Word.findById(id);
+        //checking if user wants to updates the key or not
         const wordKey = body.key ? body.key : response.key;
+        //extracting old translations
         const oldTranslation = response.translations;
+        //merging old translations with the new translations
+        //if there is two keys matchs ... the new one will replace the old one.
         const updatedTranslation = {...oldTranslation, ...body.translations};
         response.translations = updatedTranslation;
         await response.save();
