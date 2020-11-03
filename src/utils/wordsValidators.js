@@ -129,8 +129,8 @@ const validate = (method) => {
 
                 /* ------------------- Key Validation ------------------- */
                 //trim().escape() will sanitize the body but will not keep the text
-                body('key', 'key cannot be empty string').not().equals(''),
-                body('key', 'key cannot be empty string').not().equals(' '),
+                body('key', 'key cannot be empty string').optional().not().equals(''),
+                body('key', 'key cannot be empty string').optional().not().equals(' '),
                 /* ------------------- End Of Key Validation ------------------- */
 
                 /* ------------------- Edits Validation ------------------- */

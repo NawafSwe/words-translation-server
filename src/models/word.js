@@ -26,7 +26,8 @@ const wordSchema = mongoose.Schema({
     //translations: object that holds the word and its translations for example en : nawaf
     translations: {type: Object},
     // deleted: boolean value too keep track of the data we won't delete
-    deleted: {type: Boolean, default: false}
+    deleted: {type: Boolean, default: false},
+    status: {type: String, default: 'Approved'},
 });
 /* ------------ Creating Word Model ------------ */
 const Word = mongoose.model('Word', wordSchema);
