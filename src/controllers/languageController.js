@@ -14,6 +14,7 @@
 
 const Language = require('../models/language');
 
+//make direction all lowercase.
 /* ------------------- Functions ------------------- */
 /** @author Nawaf Alsharqi
  * @async

@@ -73,8 +73,8 @@ if (process.env.NODE === 'production' || process.env.NODE_ENV === 'staging') {
 }
 /* ------------ App Config ------------ */
 const app = express();
-app.use(bodyParser.json());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors());

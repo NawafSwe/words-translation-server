@@ -42,27 +42,52 @@ const getWords = async () => {
 /** @author Nawaf Alsharqi.
  * @async
  * @function
- * @name postWord.
+ * @name upsertWord.
  * @param {Object} body contains the data about the word.
  * @returns {Promise<Object<Word>>} returns the object that added to the database.
  * @throws {Error} throws an error during the process if there is an error.
- * @description posting new word to the database.
+ * @description posting or updating a word to the database.
  */
-const postWord = async (body) => {
+const upsertWord = async (body) => {
     //change the process using the id if found update otherwise create
     try {
-        //checking if the word is pre-exist in the db or not
-        if (body.id) {
-            console.log(`id here ${body.id} and the hole body is \n ${body}`);
-            return null;
+        //extracting the data to format everything.
+        const editsData = body.edits;
+        const timestamp = editsData.timestamp;
+        const editor = editsData.editor;
+        const wordKey = body.key ? body.key : null;
+        const translations = body.translations;
+        const isFound = await Word.findById(body.id);
+        const wordStatus = body.status;
+        if (isFound) {
+            //if the word key not null means user wants to update it otherwise keep it.
+            isFound.key = wordKey === null ? isFound.key : wordKey;
+            //commit changes
+            await isFound.save();
+            //if the status of the word changes
+            isFound.status = wordStatus === null ? isFound.status : wordStatus;
+            //commit changes
+            await  isFound.save();
+            //extract old translations
+            const oldTranslation = isFound.translations;
+            //merging old translations with the new translations
+            //if there is two keys matchs ... the new one will replace the old one.
+            const updatedTranslation = {...oldTranslation, ...body.translations};
+            //updating the translations
+            isFound.translations = updatedTranslation;
+            //commit changes
+            await isFound.save();
+
+            //forming the edits version for old version
+            editsData.version = await translationHelper.versionFormatter(isFound.key, editor, timestamp, updatedTranslation);
+            //push it to edits
+            await isFound.edits.push(editsData);
+            //commits changes
+            await isFound.save();
+            return isFound;
+
         } else {
-            //if id not included means the request was post request
-            //extracting the data to format everything.
-            const wordKey = body.key;
-            const translations = body.translations;
-            const editsData = body.edits;
-            const timestamp = editsData.timestamp;
-            const editor = editsData.editor;
+            //if word not found in db means creates new one
             const response = await Word.create({key: wordKey, translations: translations});
             //forming the edits version
             editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
@@ -71,7 +96,6 @@ const postWord = async (body) => {
             //returning the word with its data
             return response;
         }
-
     } catch (error) {
         console.log(`error happened in word controller at postWord() error: ${error}`);
     }
@@ -149,11 +173,11 @@ const putWordById = async (id, body) => {
 /**
  * A module contains all functions have the controlls of word collection in the database
  * @exports
- * @type {{getWordById: (function(String): Promise<Object<Word>>), postWord: (function(Object): Promise<Object<Word>>), deleteWord: (function(String): Promise<Object<Word>>), getWords: (function(): Promise<*|undefined>), putWordById: (function(String, *): Promise<Object<Word>>)}}
+ * @type {{getWordById: (function(String): Promise<Object<Word>>), upsertWord: (function(Object): Promise<Object<Word>>), deleteWord: (function(String): Promise<Object<Word>>), getWords: (function(): Promise<*|undefined>), putWordById: (function(String, *): Promise<Object<Word>>)}}
  */
 module.exports = {
     getWords,
-    postWord,
+    upsertWord,
     deleteWord,
     getWordById,
     putWordById,
