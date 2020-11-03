@@ -56,7 +56,7 @@ const validate = require('../utils/wordsValidators');
  * @type {Object}
  * @namespace validationResult
  */
-const {validationResult} = require('express-validator/check');
+const {validationResult} = require('express-validator');
 
 
 /**

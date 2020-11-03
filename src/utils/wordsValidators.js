@@ -14,7 +14,7 @@
  * @namespace body
  * @namespace param
  */
-const {body, param} = require('express-validator/check');
+const {body, param} = require('express-validator');
 /**
  * Object that holds functions to validate request schema and queries of giving request
  * @type {Object}
@@ -89,8 +89,10 @@ const validate = (method) => {
                 /* ------------------- End Of Schema Validation ------------------- */
 
                 /* ------------------- Key Validation ------------------- */
+                //trim().escape() will sanitize the body but will not keep the text
                 body('key', 'key cannot be empty string').not().equals(''),
                 body('key', 'key cannot be empty string').not().equals(' '),
+
                 /* ------------------- End Of Key Validation ------------------- */
 
                 /* ------------------- Edits Validation ------------------- */
@@ -126,8 +128,9 @@ const validate = (method) => {
                 /* -------------------END OF ID Validation ------------------- */
 
                 /* ------------------- Key Validation ------------------- */
-                body('key', 'key cannot be empty string').optional().not().equals(''),
-                body('key', 'key cannot be empty string').optional().not().equals(' '),
+                //trim().escape() will sanitize the body but will not keep the text
+                body('key', 'key cannot be empty string').not().equals(''),
+                body('key', 'key cannot be empty string').not().equals(' '),
                 /* ------------------- End Of Key Validation ------------------- */
 
                 /* ------------------- Edits Validation ------------------- */
