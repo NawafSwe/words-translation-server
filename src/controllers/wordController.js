@@ -58,7 +58,9 @@ const upsertWord = async (body) => {
         const wordKey = body.key ? body.key : null;
         const translations = body.translations;
         const isFound = await Word.findById(body.id);
-        const wordStatus = body.status;
+        //it may included in the put or post  body or not so we want to check
+
+        let wordStatus = body.status ? body.status : null;
         if (isFound) {
             //if the word key not null means user wants to update it otherwise keep it.
             isFound.key = wordKey === null ? isFound.key : wordKey;
@@ -67,7 +69,7 @@ const upsertWord = async (body) => {
             //if the status of the word changes
             isFound.status = wordStatus === null ? isFound.status : wordStatus;
             //commit changes
-            await  isFound.save();
+            await isFound.save();
             //extract old translations
             const oldTranslation = isFound.translations;
             //merging old translations with the new translations
@@ -77,9 +79,8 @@ const upsertWord = async (body) => {
             isFound.translations = updatedTranslation;
             //commit changes
             await isFound.save();
-
             //forming the edits version for old version
-            editsData.version = await translationHelper.versionFormatter(isFound.key, editor, timestamp, updatedTranslation);
+            editsData.version = await translationHelper.versionFormatter(isFound.key, editor, timestamp, updatedTranslation, isFound.status);
             //push it to edits
             await isFound.edits.push(editsData);
             //commits changes
@@ -88,9 +89,11 @@ const upsertWord = async (body) => {
 
         } else {
             //if word not found in db means creates new one
-            const response = await Word.create({key: wordKey, translations: translations});
+            //re-inital the word status to not approved because it is null , and making sure it is null or not
+            wordStatus = wordStatus === null ? 'Not Approved' : wordStatus;
+            const response = await Word.create({key: wordKey, translations: translations, status: wordStatus});
             //forming the edits version
-            editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations);
+            editsData.version = await translationHelper.versionFormatter(wordKey, editor, timestamp, translations, wordStatus);
             await response.edits.push(editsData);
             await response.save();
             //returning the word with its data

@@ -13,11 +13,12 @@
  * @param {String} editor id of the editor.
  * @param {Number} timestamp time for the editing.
  * @param {Object} translations data about the world for each language.
+ * @param {string} status status of the word
  * @returns {Promise<Object>} formatted javaScript object.
  * @throws {Error} throws an error if there is an error.
  * @description formatting version object.
  */
-const versionFormatter = async (wordKey, editor, timestamp, translations) => {
+const versionFormatter = async (wordKey, editor, timestamp, translations, status) => {
     try {
         const version = {};
         return {
@@ -26,7 +27,8 @@ const versionFormatter = async (wordKey, editor, timestamp, translations) => {
                 editor: editor,
                 timestamp: timestamp,
             },
-            translations: translations
+            translations: translations,
+            status: status
         };
     } catch (error) {
         console.log(`error occurred in the wordHelpersFunctions error: ${error}`);

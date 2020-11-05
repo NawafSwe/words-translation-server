@@ -27,6 +27,7 @@ const wordSchema = mongoose.Schema({
     translations: {type: Object},
     // deleted: boolean value too keep track of the data we won't delete
     deleted: {type: Boolean, default: false},
+    //status: string value represents the status of the word
     status: {type: String, default: 'Approved'},
 });
 /* ------------ Creating Word Model ------------ */

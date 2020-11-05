@@ -49,8 +49,8 @@ const sanitizeLanguage = async (req) => {
         if (req.body.code) {
             req.body.code = req.sanitize(req.body.code);
         }
-        if (req.bod.direction) {
-            req.body.direction = req.sanitize(req.bod.direction);
+        if (req.body.direction) {
+            req.body.direction = req.sanitize(req.body.direction);
         }
 
     } catch (error) {

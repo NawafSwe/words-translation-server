@@ -32,6 +32,10 @@ const route = express.Router();
  */
 const sanitizer = require('express-sanitizer');
 
+
+/* ------------ Route Config ------------ */
+route.use(sanitizer());
+
 /**
  *  sanitizerHelper object have functions to sanitize request.
  * @type {object}
@@ -66,10 +70,6 @@ const {validationResult} = require('express-validator');
  * @namespace wordController
  */
 const wordController = require('../controllers/wordController');
-
-
-/* ------------ Route Config ------------ */
-route.use(sanitizer());
 
 /* ---------- Routing ---------- */
 
@@ -174,10 +174,10 @@ route.put('/:id', validate('putWordById'), async (req, res) => {
         res.send(err.mapped()).status(400);
 
     } else {
+        //sanitize word.
+        await sanitizerHelper.sanitizeWord(req);
         //including the id of the word inside the body.
         req.body.id = req.params.id;
-        //sanitize word.
-
         const response = await wordController.upsertWord(req.body);
         res.json(response).status(200);
     }
