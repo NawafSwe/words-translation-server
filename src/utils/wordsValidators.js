@@ -81,7 +81,7 @@ const validate = (method) => {
             return [
                 /* ------------------- Schema Validation ------------------- */
                 body(' ').custom((value, {req}) => {
-                    const schemas = ['key', 'edits', 'translations'];
+                    const schemas = ['key', 'edits', 'translations', 'status'];
                     if (validateSchema(schemas, req)) {
                         return true
                     }
@@ -90,10 +90,18 @@ const validate = (method) => {
 
                 /* ------------------- Key Validation ------------------- */
                 //trim().escape() will sanitize the body but will not keep the text
+                body('key', 'status must be of type string').isString(),
                 body('key', 'key cannot be empty string').not().equals(''),
                 body('key', 'key cannot be empty string').not().equals(' '),
 
                 /* ------------------- End Of Key Validation ------------------- */
+
+                /* ------------------- Status Validation ------------------- */
+                body('status', 'status must be of type string').optional().isString(),
+                body('status', 'status cannot be empty string').optional().not().isEmpty(),
+                body('status', 'status cannot be empty').optional().not().equals(' '),
+                /* ------------------- End Of status Validation ------------------- */
+
 
                 /* ------------------- Edits Validation ------------------- */
                 body('edits.editor', 'editor field must be valid mongo Id').isMongoId(),
@@ -117,7 +125,7 @@ const validate = (method) => {
             return [
                 /* ------------------- Schema Validation ------------------- */
                 body(' ').custom((value, {req}) => {
-                    const schemas = ['key', 'edits', 'translations'];
+                    const schemas = ['key', 'edits', 'translations', 'status'];
                     if (validateSchema(schemas, req)) {
                         return true
                     }
@@ -132,6 +140,13 @@ const validate = (method) => {
                 body('key', 'key cannot be empty string').optional().not().equals(''),
                 body('key', 'key cannot be empty string').optional().not().equals(' '),
                 /* ------------------- End Of Key Validation ------------------- */
+
+                /* ------------------- Status Validation ------------------- */
+                body('status', 'status must be of type string').optional().isString(),
+                body('status', 'status cannot be empty string').optional().not().isEmpty(),
+                body('status', 'status cannot be empty').optional().not().equals(' '),
+                /* ------------------- End Of status Validation ------------------- */
+
 
                 /* ------------------- Edits Validation ------------------- */
                 body('edits.editor', 'editor field must be valid mongo Id').isMongoId(),

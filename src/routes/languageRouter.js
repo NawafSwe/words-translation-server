@@ -35,7 +35,7 @@ const sanitizer = require('express-sanitizer');
  * @const
  * @namespace validationResult
  */
-const {validationResult} = require('express-validator/check');
+const {validationResult} = require('express-validator');
 
 
 /**
