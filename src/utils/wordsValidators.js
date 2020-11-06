@@ -37,60 +37,64 @@ const validate = (method) => {
         case 'getWords': {
             return [
                 /* ------------------- Schema Validation ------------------- */
-                body(' ').custom((value, {req}) => {
-                    const schemas = [undefined];
-                    if (validateSchema(schemas, req)) {
-                        return true;
-                    }
-                }),
+                body(' ')
+                    .custom((value, {req}) => {
+                        const schemas = [undefined];
+                        if (validateSchema(schemas, req)) {
+                            return true;
+                        }
+                    }),
                 /* ------------------- End Of Schema Validation ------------------- */
             ];
         }
         case 'getWordById': {
             return [
                 /* ------------------- Schema Validation ------------------- */
-                body(' ').custom((value, {req}) => {
-                    const schemas = [undefined];
-                    if (validateSchema(schemas, req)) {
-                        return true;
-                    }
-                }),
+                body(' ')
+                    .custom((value, {req}) => {
+                        const schemas = [undefined];
+                        if (validateSchema(schemas, req)) {
+                            return true;
+                        }
+                    }),
                 /* ------------------- End Of Schema Validation ------------------- */
 
                 /* ------------------- ID Validation ------------------- */
-                param('id').isMongoId()
+                param('id', 'id must be valid mongo id').exists().isMongoId()
                 /* -------------------END OF ID Validation ------------------- */
             ];
 
         }
         case 'deleteWordById': {
             /* ------------------- Schema Validation ------------------- */
-            body(' ').custom((value, {req}) => {
-                const schemas = [undefined];
-                if (validateSchema(schemas, req)) {
-                    return true;
-                }
-            })
+            body(' ')
+                .custom((value, {req}) => {
+                    const schemas = [undefined];
+                    if (validateSchema(schemas, req)) {
+                        return true;
+                    }
+                })
             /* ------------------- End Of Schema Validation ------------------- */
 
             /* ------------------- ID Validation ------------------- */
-            param('id').isMongoId()
+            param('id', 'id must be valid mongo id').exists().isMongoId()
             /* -------------------END OF ID Validation ------------------- */
         }
         case 'postWord': {
             return [
                 /* ------------------- Schema Validation ------------------- */
-                body(' ').custom((value, {req}) => {
-                    const schemas = ['key', 'edits', 'translations', 'status'];
-                    if (validateSchema(schemas, req)) {
-                        return true
-                    }
-                }),
+                body(' ')
+                    .custom((value, {req}) => {
+                        const schemas = ['key', 'edits', 'translations', 'status'];
+                        if (validateSchema(schemas, req)) {
+                            return true
+                        }
+                    }),
                 /* ------------------- End Of Schema Validation ------------------- */
 
                 /* ------------------- Key Validation ------------------- */
                 //trim().escape() will sanitize the body but will not keep the text
-                body('key', 'status must be of type string').isString(),
+                body('key', 'status must be exits and of type string').exists().isString(),
                 body('key', 'key cannot be empty string').not().equals(''),
                 body('key', 'key cannot be empty string').not().equals(' '),
 
@@ -104,19 +108,21 @@ const validate = (method) => {
 
 
                 /* ------------------- Edits Validation ------------------- */
-                body('edits.editor', 'editor field must be valid mongo Id').isMongoId(),
-                body('edits.timestamp', 'timestamp must be number').isNumeric(),
+                body('edits.editor', 'editor field must be exist and valid mongo Id').exists().isMongoId(),
+                body('edits.timestamp', 'timestamp must be exist and of type number').exists().isNumeric(),
                 /* ------------------- End Of Edits Validation ------------------- */
 
                 /* ------------------- Translations Validation ------------------- */
-                body('translations').custom((translationValues, {req}) => {
-                    for (let value of Object.values(translationValues)) {
-                        if (typeof value != 'string') {
-                            throw new Error('value of a translated word must be string');
+                body('translations')
+                    .optional()
+                    .custom((translationValues, {req}) => {
+                        for (let value of Object.values(translationValues)) {
+                            if (typeof value != 'string') {
+                                throw new Error('value of a translated word must be string');
+                            }
                         }
-                    }
-                    return true;
-                }),
+                        return true;
+                    }),
                 /* ------------------- End Of Translations Validation ------------------- */
 
             ];
@@ -132,7 +138,7 @@ const validate = (method) => {
                 }),
                 /* ------------------- End Of Schema Validation ------------------- */
                 /* ------------------- ID Validation ------------------- */
-                param('id').isMongoId(),
+                param('id', 'id must be a valid mongo id').exists().isMongoId(),
                 /* -------------------END OF ID Validation ------------------- */
 
                 /* ------------------- Key Validation ------------------- */
@@ -149,19 +155,21 @@ const validate = (method) => {
 
 
                 /* ------------------- Edits Validation ------------------- */
-                body('edits.editor', 'editor field must be valid mongo Id').isMongoId(),
-                body('edits.timestamp', 'timestamp must be number').isNumeric(),
+                body('edits.editor', 'editor field must be exist and valid mongo Id').exists().isMongoId(),
+                body('edits.timestamp', 'timestamp must be exist and of type number').exists().isNumeric(),
                 /* ------------------- End Of Edits Validation ------------------- */
 
                 /* ------------------- Translations Validation ------------------- */
-                body('translations').optional().custom((translationValues, {req}) => {
-                    for (let value of Object.values(translationValues)) {
-                        if (typeof value != 'string') {
-                            throw new Error('value of a translated word must be string');
+                body('translations')
+                    .optional()
+                    .custom((translationValues, {req}) => {
+                        for (let value of Object.values(translationValues)) {
+                            if (typeof value != 'string') {
+                                throw new Error('value of a translated word must be string');
+                            }
                         }
-                    }
-                    return true;
-                }),
+                        return true;
+                    }),
                 /* ------------------- End Of Translations Validation ------------------- */
 
             ];
