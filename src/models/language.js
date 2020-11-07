@@ -16,9 +16,10 @@ const languageSchema = mongoose.Schema({
     //code: code of the language such ar stands for saudi arabia
     code: {type: String, require: true},
     //either 'ltr' or 'rtl' : left to right or right to left
-    direction: {type: String, require: true}
+    direction: {type: String, require: true},
 });
 /* ------------ Creating Mongoose Model ------------ */
+
 const Language = mongoose.model('Language', languageSchema);
 /* ---------- Exporting Model ---------- */
 /**

@@ -28,9 +28,11 @@ const validateSchema = require('./checkSchema');
  * @function
  * @name validate
  * @param {String} method name of the case to determine which validation we go with.
+ * @return {Object} returns object that contains info about request if it has an error or not
  * @throws {Error} throws an error if there is an error.
  * @description validate request before miss with the database.
  */
+
 const validate = (method) => {
     switch (method) {
 
