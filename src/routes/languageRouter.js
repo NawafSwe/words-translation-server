@@ -100,9 +100,14 @@ route.get('/', validate('getLanguages'), async (req, res) => {
  * @param {callback} middleware - Express validator middleware.
  * @param {callback} middleware - Express middleware.
  */
-route.get('/:id', async (req, res) => {
-    const response = await languageController.getLanguageById(req.params.id);
-    res.json(response).status(200);
+route.get('/:id', validate('getLanguageById'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        const response = await languageController.getLanguageById(req.params.id);
+        res.json(response).status(200);
+    }
 });
 
 /**
@@ -116,9 +121,15 @@ route.get('/:id', async (req, res) => {
  * @param {callback} middleware - Express middleware.
  */
 
-route.put('/:id', async (req, res) => {
-    const response = await languageController.putLanguage(req.params.id, req.body);
-    res.json(response).status(200);
+route.put('/:id', validate('putLanguageById'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        const response = await languageController.putLanguage(req.params.id, req.body);
+        res.json(response).status(200);
+    }
+
 });
 
 /**
@@ -132,12 +143,26 @@ route.put('/:id', async (req, res) => {
  * @param {callback} middleware - Express middleware.
  */
 
-route.delete('/:id', async (req, res) => {
-    const response = await languageController.deleteLanguage(req.params.id);
-    res.json(response).status(200);
+route.delete('/:id', validate('deleteLanguageById'), async (req, res) => {
+    const err = validationResult(req);
+    if (!err.isEmpty()) {
+        res.send(err.mapped()).status(400);
+    } else {
+        const response = await languageController.deleteLanguage(req.params.id);
+        res.json(response).status(200);
+    }
 });
 
-
+/**
+ * Route post language.
+ * @name post/languages
+ * @function
+ * @memberOf module:routes/languageRouter~route
+ * @inner
+ * @param {string} path - Express path
+ * @param {callback} middleware - Express validator middleware.
+ * @param {callback} middleware - Express middleware.
+ */
 route.post('/', validate('postLanguage'), async (req, res) => {
     const err = validationResult(req);
     if (!err.isEmpty()) {
