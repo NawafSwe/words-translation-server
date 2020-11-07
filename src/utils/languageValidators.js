@@ -21,9 +21,9 @@ const {body, param, check} = require('express-validator');
  * Object that holds functions to validate request schema and queries of giving request
  * @type {Object}
  * @const
- * @namespace validateSchema
+ * @namespace checkSchema
  */
-const validateSchema = require('./validateSchema');
+const validateSchema = require('./checkSchema');
 
 //checking left to right or right to left
 
