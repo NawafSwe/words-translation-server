@@ -29,7 +29,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 /**
- * helmet model to protect the server
+ * helmet model to enhance the security of the server
  * @const
  * @type {Object}
  * @namespace helmet
@@ -37,14 +37,14 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
 /**
- * morgan module
+ * morgan module to show the called endpoint with proper time
  * @const
  * @type {Object}
  * @namespace morgan
  */
 const morgan = require('morgan');
 /**
- * cors module
+ * cors module to use cors-origin
  * @type {Object}
  * @const
  * @namespace cors
@@ -58,7 +58,7 @@ const cors = require('cors');
  */
 const mongoConnection = require('./configuration/MongoConnection');
 /**
- * express validator module to validate body request
+ * express validator module to validate a {body,query,param} request
  * @const
  * @type {Object}
  * @namespace expressValidator
@@ -81,7 +81,9 @@ app.use(cors());
 
 
 /* ------------ Connecting to db ------------ */
+
 mongoConnection(process.env.MONGO_URI);
+
 /* ------------ Testing Backend ------------ */
 /**
  * Route get backend health.
